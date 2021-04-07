@@ -1,12 +1,14 @@
-#pragma once
+#include <iostream>
+using namespace std;
+
 #ifndef Matrice
 #define Matrice 
 
 template <class MType> class CMatrice
 {
 private :
-	unsigned int nNombreLigne;
-	unsigned int nNombreColonne;
+	unsigned int nNombreLignes;
+	unsigned int nNombreColonnes;
 	MType** pTableau; //MType[][]* pTableau
 
 public :
@@ -14,12 +16,12 @@ public :
 	CMatrice(CMatrice &MATarg); //constructeur de recopie
 	CMatrice(unsigned int nNombreLigne, unsigned int nNombreColonne);
 	~CMatrice(); //destructeur par défaut
-	CMatrice MATCalculerTrans();
+	CMatrice MATCalculerTranspose();
 	CMatrice MATMultElem(void* c);
 	CMatrice MATDivElem(void* c);
-	CMatrice operator+(CMatrice* MATarg);
-	CMatrice operator*(CMatrice* MATarg);
-	CMatrice operator-(CMatrice* MATarg);
+	CMatrice & operator+(CMatrice);
+	CMatrice & operator*(CMatrice);
+	CMatrice & operator-(CMatrice);
 };
 #endif
 

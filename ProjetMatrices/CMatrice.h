@@ -9,19 +9,19 @@ template <class MType> class CMatrice
 private :
 	unsigned int nNombreLignes;
 	unsigned int nNombreColonnes;
-	MType** pTableau; //MType[][]* pTableau
+	MType** pTableau; //MType[][]* pTableau //tableau à double entrée de pointeur
 
 public :
 	CMatrice(); //constructeur par défaut
 	CMatrice(CMatrice &MATarg); //constructeur de recopie
-	CMatrice(unsigned int nNombreLigne, unsigned int nNombreColonne);
+	CMatrice(unsigned int nNombreLigne, unsigned int nNombreColonne, MType** pTableau);
 	~CMatrice(); //destructeur par défaut
-	CMatrice MATCalculerTranspose();
-	CMatrice operator*(MType* c);
-	CMatrice operator/(MType* c);
-	CMatrice & operator+(CMatrice);
-	CMatrice & operator*(CMatrice);
-	CMatrice & operator-(CMatrice);
+	CMatrice MATCalculerTranspose(); //calcule la transposée
+	CMatrice operator*(MType* c); //multiplication par une constante
+	CMatrice operator/(MType* c); //division par une constante
+	CMatrice & operator+(CMatrice); //addition de deux matrices
+	CMatrice & operator*(CMatrice); //multiplication de deux matrices
+	CMatrice & operator-(CMatrice); //soustraction de deux matrices
 };
 #endif
 
@@ -36,7 +36,7 @@ inline CMatrice<MType>::CMatrice(CMatrice & MATarg)
 }
 
 template<class MType>
-inline CMatrice<MType>::CMatrice(unsigned int nNombreLigne, unsigned int nNombreColonne)
+inline CMatrice<MType>::CMatrice(unsigned int nNombreLigne, unsigned int nNombreColonne, MType** pTableau)
 {
 }
 

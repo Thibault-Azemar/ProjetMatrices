@@ -16,12 +16,21 @@ public :
 	CMatrice(CMatrice &MATarg); //constructeur de recopie
 	CMatrice(unsigned int nNombreLigne, unsigned int nNombreColonne);
 	~CMatrice(); //destructeur par défaut
+<<<<<<< HEAD
 	CMatrice MATCalculerTranspose();
 	CMatrice MATMultElem(void* c);
 	CMatrice MATDivElem(void* c);
 	CMatrice & operator+(CMatrice);
 	CMatrice & operator*(CMatrice);
 	CMatrice & operator-(CMatrice);
+=======
+	CMatrice MATCalculerTrans();
+	CMatrice operator*(MType* c);
+	CMatrice operator/(MType* c);
+	CMatrice operator+(CMatrice* MATarg);
+	CMatrice operator*(CMatrice* MATarg);
+	CMatrice operator-(CMatrice* MATarg);
+>>>>>>> fa8812ebf19e709fbc93230e382ce87470285522
 };
 #endif
 
@@ -52,13 +61,13 @@ inline CMatrice CMatrice<MType>::MATCalculerTrans()
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::MATMultElem(void * c)
+inline CMatrice CMatrice<MType>::operator*(MType * c)
 {
 	return CMatrice();
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::MATDivElem(void * c)
+inline CMatrice CMatrice<MType>::operator/(MType * c)
 {
 	return CMatrice();
 }

@@ -1,15 +1,13 @@
-// ProjetMatrices.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-//
-
 #include <iostream>
-
-je peux aller passer mon aspi maintenant ?
-
-sdnjdccdndcxjnnwx;
+#include "CMatrice.h"
 
 int main()
 {
     std::cout << "Hello Polytech!\n";
+	CMatrice<double>* mat;
+
+
+
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage

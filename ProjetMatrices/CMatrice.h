@@ -19,9 +19,9 @@ public :
 	CMatrice MATCalculerTranspose(); //calcule la transposée
 	CMatrice operator*(MType* c); //multiplication par une constante
 	CMatrice operator/(MType* c); //division par une constante
-	CMatrice & operator+(CMatrice); //addition de deux matrices
-	CMatrice & operator*(CMatrice); //multiplication de deux matrices
-	CMatrice & operator-(CMatrice); //soustraction de deux matrices
+	CMatrice operator+(CMatrice* Mat); //addition de deux matrices
+	CMatrice operator*(CMatrice* Mat); //multiplication de deux matrices
+	CMatrice operator-(CMatrice* Mat); //soustraction de deux matrices
 };
 #endif
 
@@ -46,7 +46,7 @@ inline CMatrice<MType>::~CMatrice()
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::MATCalculerTrans()
+inline CMatrice CMatrice<MType>::MATCalculerTranspose()
 {
 	return CMatrice();
 }

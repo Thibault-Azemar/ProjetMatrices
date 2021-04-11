@@ -12,10 +12,10 @@ private:
 	MType** pTableau; //MType[][]* pTableau //tableau à double entrée de pointeur
 
 public:
-	CMatrice();                                    //constructeur par défaut
-	CMatrice(CMatrice &);                          //constructeur de recopie
-	CMatrice(unsigned int, unsigned int, MType**); //constructeur avec paramètres
-	~CMatrice();                                   //destructeur
+	CMatrice<MType>();                                    //constructeur par défaut
+	CMatrice<MType>(CMatrice &);                          //constructeur de recopie
+	CMatrice<MType>(unsigned int, unsigned int, MType**); //constructeur avec paramètres
+	~CMatrice<MType>();                                   //destructeur
 	CMatrice MATCalculerTranspose();               //calcule la transposée
 	void MATAfficherMatrice();                     //affichage de la matrice
 	CMatrice operator*(MType);                     //multiplication par une constante

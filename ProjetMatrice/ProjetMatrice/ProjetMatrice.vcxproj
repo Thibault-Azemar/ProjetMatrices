@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\fichiers\CInteraction.cpp" />
-    <ClCompile Include="..\..\..\..\fichiers\main.cpp" />
     <ClCompile Include="CException.cpp" />
+    <ClCompile Include="CInteraction.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\fichiers\CInteraction.h" />
-    <ClInclude Include="..\..\..\..\fichiers\CMatrice.h" />
     <ClInclude Include="CException.h" />
+    <ClInclude Include="CInteraction.h" />
+    <ClInclude Include="CMatrice.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

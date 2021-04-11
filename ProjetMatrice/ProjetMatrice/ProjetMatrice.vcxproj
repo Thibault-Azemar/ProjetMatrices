@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\fichiers\CInteraction.cpp" />
     <ClCompile Include="..\..\..\..\fichiers\main.cpp" />
+    <ClCompile Include="CException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\fichiers\CInteraction.h" />
     <ClInclude Include="..\..\..\..\fichiers\CMatrice.h" />
+    <ClInclude Include="CException.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

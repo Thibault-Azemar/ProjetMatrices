@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 using namespace std;
 
 #ifndef Matrice
@@ -7,22 +7,22 @@ using namespace std;
 template <class MType> class CMatrice
 {
 private:
-	unsigned int nNombreLignes;
-	unsigned int nNombreColonnes;
-	MType** pTableau; //MType[][]* pTableau //tableau à double entrée de pointeur
+	unsigned int uiMATNbLignes;
+	unsigned int uiMATNbColonnes;
+	MType** pMATTableau; //MType[][]* pTableau //tableau à double entrée de pointeur
 
 public:
 	CMatrice<MType>();                                    //constructeur par défaut
-	CMatrice<MType>(CMatrice &);                          //constructeur de recopie
-	CMatrice<MType>(unsigned int, unsigned int, MType**); //constructeur avec paramètres
+	CMatrice<MType>(CMatrice &MATarg);                          //constructeur de recopie
+	CMatrice<MType>(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pMATTableau); //constructeur avec paramètres
 	~CMatrice<MType>();                                   //destructeur
 	CMatrice MATCalculerTranspose();               //calcule la transposée
 	void MATAfficherMatrice();                     //affichage de la matrice
-	CMatrice operator*(MType);                     //multiplication par une constante
-	CMatrice operator/(MType);                     //division par une constante
-	CMatrice operator+(CMatrice);                  //addition de deux matrices
-	CMatrice operator*(CMatrice);                  //multiplication de deux matrices
-	CMatrice operator-(CMatrice);                  //soustraction de deux matrices
+	CMatrice & operator*(MType &rNombre);                    //multiplication par une constante
+	CMatrice & operator/(MType &rNombre);                    //division par une constante
+	CMatrice & operator+(CMatrice &MATarg);                  //addition de deux matrices
+	CMatrice & operator*(CMatrice &MATarg);                  //multiplication de deux matrices
+	CMatrice & operator-(CMatrice &MATarg);                  //soustraction de deux matrices
 };
 
 template<class MType>
@@ -33,35 +33,35 @@ inline CMatrice<MType>::CMatrice()
 template<class MType>
 inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
 {
-	nNombreLignes = MATarg.nNombreLignes;
-	nNombreColonnes = MATarg.nNombreColonnes;
-	pTableau = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTableau[nI] = new MType[nNombreLignes];
+	uiMATNbLignes = MATarg.uiMATNbLignes;
+	uiMATNbColonnes = MATarg.uiMATNbColonnes;
+	pMATTableau = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiMATNbColonnes++)
+		pMATTableau[uiBoucleColonne] = new MType[uiMATNbLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTableau[nI][nJ] = MATarg.pTableau[nI][nJ];
+			pMATTableau[uiBoucleLigne][uiBoucleColonne] = MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
 }
 
 template<class MType>
-inline CMatrice<MType>::CMatrice(unsigned int nNbLignes, unsigned int nNbColonnes, MType** pTableau)
+inline CMatrice<MType>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pTab)
 {
-	nNombreLignes = nNbLignes;
-	nNombreColonnes = nNbColonnes;
-	pTableau = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTableau[nI] = new MType[nNombreLignes];
+	uiMATNbLignes = uiNbLignes;
+	uiMATNbColonnes = uiNbColonnes;
+	pMATTableau = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		pMATTableau[uiBoucleColonne] = new MType[uiMATNbLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTableau[nI][nJ] = pTab[nI][nJ];
+			pMATTableau[uiBoucleLigne][uiBoucleColonne] = pTab[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
 }
@@ -74,18 +74,18 @@ inline CMatrice<MType>::~CMatrice()
 template<class MType>
 inline CMatrice CMatrice<MType>::MATCalculerTranspose()
 {
-	MType** pTab = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTab[nI] = new MType[nNombreLignes];
+	MType** pTab = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTableau[nJ][nI] = pTab[nI][nJ];
+			pMATTableau[uiBoucleColonne][uiBoucleLigne] = pTab[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
-	CMatrice MAT1(nNombreColonnes, nNombreLignes, pTab);
+	CMatrice MAT1(uiMATNbColonnes, uiMATNbLignes, pTab);
 	return MAT1;
 }
 
@@ -93,127 +93,128 @@ template<class MType>
 inline void CMatrice<MType>::MATAfficherMatrice()
 {
 	cout << "M = [ ";
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			cout << pTableau[nJ][nI] << " ";
+			cout << pMATTableau[uiBoucleColonne][uiBoucleLigne] << " ";
 		}
 		cout << endl;
 	}
 	cout << " ]" << endl;
 }
 
-template<class MType>
-inline CMatrice CMatrice<MType>::operator*(MType *rNombre)
-{
-	MType** pTab = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTab[nI] = new MType[nNombreLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+template<class MType>
+inline CMatrice CMatrice<MType>::operator*(MType &rNombre)
+{
+	MType** pTab = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
+
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[nI][nJ] = rNombre * pTableau[nI][nJ];
+			pTab[uiBoucleLigne][uiBoucleColonne] = rNombre * pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
-	CMatrice MATmultiplication(nNombreLignes, nNombreColonnes, pTab);
+	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
 	return MATmultiplication;
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::operator/(MType *rNombre)
+inline CMatrice CMatrice<MType>::operator/(MType &rNombre)
 {
 	if (rNombre == 0)
 	{
 		cout << "Impossible de diviser par 0." << endl;
 		return;
 	}
-	MType** pTab = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTab[nI] = new double[nNombreLignes];
+	MType** pTab = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		pTab[uiBoucleColonne] = new double[uiMATNbLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[nI][nJ] = pTableau[nI][nJ] / rNombre;
+			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] / rNombre;
 		}
 	}
-	CMatrice MATdivision(nNombreLignes, nNombreColonnes, pTab);
+	CMatrice MATdivision(uiMATNbLignes, uiMATNbColonnes, pTab);
 	return MATdivision;
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::operator+(CMatrice MATarg)
+inline CMatrice CMatrice<MType>::operator+(CMatrice &MATarg)
 {
-	if (nNombreColonnes != MATarg.nNombreColonnes || nNombreLignes != MATarg.nNombreLignes)
+	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
 		cout << "Impossible d'additionner ces deux matrices." << endl;
 		return;
 	}
-	MType** pTab = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTab[nI] = new MType[nNombreLignes];
+	MType** pTab = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[nI][nJ] = pTableau[nI][nJ] + MATarg.pTableau[nI][nJ];
+			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] + MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
-	CMatrice MATaddition(nNombreColonnes, nNombreLignes, pTab);
+	CMatrice MATaddition(uiMATNbColonnes, uiMATNbLignes, pTab);
 	return MATaddition;
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::operator*(CMatrice MATarg)
+inline CMatrice CMatrice<MType>::operator*(CMatrice &MATarg)
 {
-	MType** pTab = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTab[nI] = new MType[nNombreLignes];
+	MType** pTab = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[nI][nJ] = 0;
+			pTab[uiBoucleLigne][uiBoucleColonne] = 0;
 		}
 	}
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[nI][nJ] += pTableau[nI][nJ] * MATarg.pTableau[nI][nJ];
+			pTab[uiBoucleLigne][uiBoucleColonne] += pMATTableau[uiBoucleLigne][uiBoucleColonne] * MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
-	CMatrice MATmultiplication(nNombreLignes, nNombreColonnes, pTab);
+	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
 	return MATmultiplication;
 }
 
 template<class MType>
 inline CMatrice CMatrice<MType>::operator-(CMatrice MATarg)
 {
-	if (nNombreColonnes != MATarg.nNombreColonnes || nNombreLignes != MATarg.nNombreLignes)
+	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
 		cout << "Impossible de soustraire ces deux matrices." << endl;
 		return;
 	}
-	MType** pTab = new MType*[nNombreColonnes];
-	for (unsigned int nI = 0; nI < nNombreColonnes; nI++)
-		pTab[nI] = new MType[nNombreLignes];
+	MType** pTab = new MType*[uiMATNbColonnes];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		pTab[uiBoucleColonne] = new MType[nMATNbLignes];
 
-	for (unsigned int nI = 0; nI < nNombreLignes; nI++)
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (unsigned int nJ = 0; nJ < nNombreColonnes; nJ++)
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[nI][nJ] = pTableau[nI][nJ] - MATarg.pTableau[nI][nJ];
+			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] - MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
-	CMatrice MATsoustraction(nNombreLignes, nNombreColonnes, pTab);
+	CMatrice MATsoustraction(uiMATNbLignes, uiMATNbColonnes, pTab);
 	return MATsoustraction;
 }
 

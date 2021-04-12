@@ -72,7 +72,7 @@ inline CMatrice<MType>::~CMatrice()
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::MATCalculerTranspose()
+inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 {
 	MType** pTab = new MType*[uiMATNbColonnes];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
@@ -106,7 +106,7 @@ inline void CMatrice<MType>::MATAfficherMatrice()
 
 
 template<class MType>
-inline CMatrice CMatrice<MType>::operator*(MType &rNombre)
+inline CMatrice<MType> & CMatrice<MType>::operator*(MType &rNombre)
 {
 	MType** pTab = new MType*[uiMATNbColonnes];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
@@ -124,7 +124,7 @@ inline CMatrice CMatrice<MType>::operator*(MType &rNombre)
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::operator/(MType &rNombre)
+inline CMatrice<MType> & CMatrice<MType>::operator/(MType &rNombre)
 {
 	if (rNombre == 0)
 	{
@@ -147,7 +147,7 @@ inline CMatrice CMatrice<MType>::operator/(MType &rNombre)
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::operator+(CMatrice &MATarg)
+inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice &MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
@@ -170,7 +170,7 @@ inline CMatrice CMatrice<MType>::operator+(CMatrice &MATarg)
 }
 
 template<class MType>
-inline CMatrice CMatrice<MType>::operator*(CMatrice &MATarg)
+inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice &MATarg)
 {
 	MType** pTab = new MType*[uiMATNbColonnes];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
@@ -195,8 +195,9 @@ inline CMatrice CMatrice<MType>::operator*(CMatrice &MATarg)
 	return MATmultiplication;
 }
 
+
 template<class MType>
-inline CMatrice CMatrice<MType>::operator-(CMatrice MATarg)
+inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice & MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
@@ -205,7 +206,7 @@ inline CMatrice CMatrice<MType>::operator-(CMatrice MATarg)
 	}
 	MType** pTab = new MType*[uiMATNbColonnes];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		pTab[uiBoucleColonne] = new MType[nMATNbLignes];
+		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
 
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{

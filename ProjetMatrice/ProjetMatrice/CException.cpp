@@ -1,4 +1,5 @@
 #include "CException.h"
+using namespace std;
 
 CException::CException()
 {
@@ -17,4 +18,9 @@ CException::~CException()
 void CException::EXCmodifier_valeur(int EXCValeur)
 {
 	this->uiEXCValeur = EXCValeur;
+}
+
+void CException::EXCafficher_valeur()
+{
+	cout << uiEXCValeur;
 }

@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 class CException
 {
 private:
@@ -8,6 +10,6 @@ public:
 	CException(CException* EXPobj);
 	~CException();
 	void EXCmodifier_valeur(int EXCValeur);
-
+	void EXCafficher_valeur();
 };
 

@@ -7,7 +7,7 @@
 int main()
 {
 	unsigned int uiLigne = 3;
-	unsigned int uiColonne = 4;
+	unsigned int uiColonne = 3;
 	double** pTab = new double*[uiColonne];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiColonne; uiBoucleColonne++)
 		pTab[uiBoucleColonne] = new double[uiLigne];
@@ -21,7 +21,37 @@ int main()
 		}
 	}
 	CMatrice<double> MATObjet(uiLigne, uiColonne, pTab);
+
 	MATObjet.MATAfficherMatrice();
+
+	double** pTab2 = new double*[uiColonne];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiColonne; uiBoucleColonne++)
+		pTab2[uiBoucleColonne] = new double[uiLigne];
+	//for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiLigne; uiBoucleLigne++)
+		//pTab[uiBoucleLigne] = new double[uiColonne];
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiLigne; uiBoucleLigne++)
+	{
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiColonne; uiBoucleColonne++)
+		{
+			pTab2[uiBoucleLigne][uiBoucleColonne] = 1;
+		}
+	}
+
+	CMatrice<double> MATObjet2(uiLigne, uiColonne, pTab2);
+	MATObjet2.MATAfficherMatrice();
+
+	CMatrice<double> MATobj3 = MATObjet + MATObjet2;
+
+	try {
+		MATobj3.MATAfficherMatrice();
+	}
+	catch (CException EXClevee)
+	{
+		cout << EXClevee.EXCavoir_desc;
+	}
+
+	
+
 	std::cout << "Hello Polytech!\n";
 }
 

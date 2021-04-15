@@ -5,14 +5,16 @@ using namespace std;
 class CException 
 {
 private:
-	int uiEXCValeur; //numéro de l'erreur
+	unsigned int uiEXCValeur; //numéro de l'erreur
 	string sEXCDesc; //Description de l'erreur
 public:
 	CException();
 	CException(CException* EXPobj);
-	CException(int uiValeur, string sDesc);
+	CException(unsigned int uiValeur, string sDesc);
 	~CException();
-	int EXCavoir_valeur();
+	void EXCmodifier_desc(string sDesc);
+	void EXCmodifier_valeur(unsigned int uiValeur);
+	unsigned int EXCavoir_valeur();
 	string EXCavoir_desc();
 };
 

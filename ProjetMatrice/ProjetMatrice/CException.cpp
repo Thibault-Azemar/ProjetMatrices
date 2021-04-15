@@ -3,8 +3,8 @@
 
 CException::CException()
 {
-	int uiEXCValeur = 0;
-	string const& sEXCDesc = "";
+	unsigned int uiEXCValeur = 0;
+	string const sEXCDesc = "";
 }
 
 CException::CException(CException * EXPobj)
@@ -13,7 +13,7 @@ CException::CException(CException * EXPobj)
 	sEXCDesc = EXPobj->sEXCDesc;
 }
 
-CException::CException(int uiValeur, string sDesc)
+CException::CException(unsigned int uiValeur, string sDesc)
 {
 	uiEXCValeur = uiValeur;
 	sEXCDesc = sDesc;
@@ -23,8 +23,18 @@ CException::~CException()
 {
 }
 
+void CException::EXCmodifier_desc(string sDesc)
+{
+	sEXCDesc = sDesc;
+}
 
-int CException::EXCavoir_valeur()
+void CException::EXCmodifier_valeur(unsigned int uiValeur)
+{
+	uiEXCValeur = uiValeur;
+}
+
+
+unsigned int CException::EXCavoir_valeur()
 {
 	return uiEXCValeur;
 }

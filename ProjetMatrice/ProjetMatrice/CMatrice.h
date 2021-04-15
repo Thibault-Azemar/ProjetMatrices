@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "CException.h"
 using namespace std;
 
 #ifndef Matrice
@@ -154,8 +155,10 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice &MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		cout << "Impossible d'additionner ces deux matrices." << endl;
-		return;
+		//cout << "Impossible d'additionner ces deux matrices." << endl;
+		CException EXCobj;
+		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");
+		throw (EXCobj);
 	}
 	MType** pTab = new MType*[uiMATNbColonnes];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)

@@ -6,14 +6,22 @@
 
 int main()
 {
-	int **tab;
-	unsigned int a = 2;
-	unsigned int b = 2;
-	CMatrice<int> MATObjet(a, b, tab);
-
-	MATObjet.MATAfficherMatrice;
-
-	
+	unsigned int uiLigne = 3;
+	unsigned int uiColonne = 4;
+	double** pTab = new double*[uiColonne];
+	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiColonne; uiBoucleColonne++)
+		pTab[uiBoucleColonne] = new double[uiLigne];
+	//for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiLigne; uiBoucleLigne++)
+		//pTab[uiBoucleLigne] = new double[uiColonne];
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiLigne; uiBoucleLigne++)
+	{
+		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiColonne; uiBoucleColonne++)
+		{
+			pTab[uiBoucleLigne][uiBoucleColonne] = 2;
+		}
+	}
+	CMatrice<double> MATObjet(uiLigne, uiColonne, pTab);
+	MATObjet.MATAfficherMatrice();
 	std::cout << "Hello Polytech!\n";
 }
 

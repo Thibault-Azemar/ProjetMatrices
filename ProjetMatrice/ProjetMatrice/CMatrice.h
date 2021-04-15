@@ -28,7 +28,9 @@ public:
 template<class MType>
 inline CMatrice<MType>::CMatrice()
 {
-
+	uiMATNbLignes = 0;
+	uiMATNbColonnes = 0;
+	pMATTableau = nullptr;
 }
 
 template<class MType>

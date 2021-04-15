@@ -6,7 +6,14 @@
 
 int main()
 {
-	CMatrice<int> MATObjet;
+	int **tab;
+	unsigned int a = 2;
+	unsigned int b = 2;
+	CMatrice<int> MATObjet(a, b, tab);
+
+	MATObjet.MATAfficherMatrice;
+
+	
 	std::cout << "Hello Polytech!\n";
 }
 

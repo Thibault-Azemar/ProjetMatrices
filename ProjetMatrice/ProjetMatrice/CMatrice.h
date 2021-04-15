@@ -28,6 +28,7 @@ public:
 template<class MType>
 inline CMatrice<MType>::CMatrice()
 {
+
 }
 
 template<class MType>

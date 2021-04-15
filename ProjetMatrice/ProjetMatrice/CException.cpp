@@ -1,26 +1,35 @@
 #include "CException.h"
-using namespace std;
+
 
 CException::CException()
 {
 	int uiEXCValeur = 0;
+	string const& sEXCDesc = "";
 }
 
 CException::CException(CException * EXPobj)
 {
-	int uiEXCValeur = EXPobj->uiEXCValeur;
+	uiEXCValeur = EXPobj->uiEXCValeur;
+	sEXCDesc = EXPobj->sEXCDesc;
+}
+
+CException::CException(int uiValeur, string sDesc)
+{
+	uiEXCValeur = uiValeur;
+	sEXCDesc = sDesc;
 }
 
 CException::~CException()
 {
 }
 
-void CException::EXCmodifier_valeur(int EXCValeur)
+
+int CException::EXCavoir_valeur()
 {
-	this->uiEXCValeur = EXCValeur;
+	return uiEXCValeur;
 }
 
-void CException::EXCafficher_valeur()
+string CException::EXCavoir_desc()
 {
-	cout << uiEXCValeur;
+	return this->sEXCDesc;
 }

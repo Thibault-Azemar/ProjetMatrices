@@ -1,15 +1,18 @@
 #pragma once
 #include <iostream>
+using namespace std;
 
-class CException
+class CException 
 {
 private:
-	int uiEXCValeur;
+	int uiEXCValeur; //numéro de l'erreur
+	string sEXCDesc; //Description de l'erreur
 public:
 	CException();
 	CException(CException* EXPobj);
+	CException(int uiValeur, string sDesc);
 	~CException();
-	void EXCmodifier_valeur(int EXCValeur);
-	void EXCafficher_valeur();
+	int EXCavoir_valeur();
+	string EXCavoir_desc();
 };
 

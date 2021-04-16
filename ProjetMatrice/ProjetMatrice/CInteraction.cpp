@@ -27,7 +27,6 @@ CInteraction::CInteraction(char *pNomFichier)
 
 		CString STRTest;
 		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
-		delete[] pLigneFichier;
 
 		if (!STRTest.STRChainesEgales(pINTTypeMatriceCorrecte, pLigneFichierExtraite))
 		{
@@ -36,18 +35,16 @@ CInteraction::CInteraction(char *pNomFichier)
 		}
 
 		uiCompteur = 0; // réinitialisation à 0 du compteur
-		char *pLigneFichier1 = new char[100];
 
 		/* 2. On est sur la deuxième ligne du fichier censée contenir le nombre de lignes */
 		while (cCaractere != '=') // tant qu'on est pas à la fin de la ligne
 		{
 			fichier.get(cCaractere); // on récupère le caractère de la ligne du fichier
-			pLigneFichier1[uiCompteur] = cCaractere; // on place le caractère dans le tableau de la ligne de fichier
+			pLigneFichier[uiCompteur] = cCaractere; // on place le caractère dans le tableau de la ligne de fichier
 			uiCompteur++;
 		}
 
-		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier1, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
-		delete[] pLigneFichier1;
+		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
 
 		if (!STRTest.STRChainesEgales(pINTLigneCorrecte, pLigneFichierExtraite))
 		{
@@ -70,18 +67,16 @@ CInteraction::CInteraction(char *pNomFichier)
 
 
 		uiCompteur = 0; // réinitialisation à 0 du compteur
-		char *pLigneFichier2 = new char[100];
 
 		/* 3. On est sur la troisième ligne du fichier censée contenir le nombre de colonnes */
 		while (cCaractere != '=') // tant qu'on est pas à la fin de la ligne
 		{
 			fichier.get(cCaractere); // on récupère le caractère de la ligne du fichier
-			pLigneFichier2[uiCompteur] = cCaractere; // on place le caractère dans le tableau de la ligne de fichier
+			pLigneFichier[uiCompteur] = cCaractere; // on place le caractère dans le tableau de la ligne de fichier
 			uiCompteur++;
 		}
 
-		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier2, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
-		delete[] pLigneFichier2;
+		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
 
 		if (!STRTest.STRChainesEgales(pINTColonneCorrecte, pLigneFichierExtraite))
 		{
@@ -104,18 +99,17 @@ CInteraction::CInteraction(char *pNomFichier)
 
 		uiCompteur = 0; // réinitialisation à 0 du compteur
 		cCaractere = 'a'; // réinitialisation du caractère
-		char *pLigneFichier3 = new char[100];
 
 		/* 4. On est sur la quatrième ligne du fichier censée déclarer */
 		while (cCaractere != '\n') // tant qu'on est pas à la fin de la ligne
 		{
 			fichier.get(cCaractere); // on récupère le caractère de la ligne du fichier
-			pLigneFichier3[uiCompteur] = cCaractere; // on place le caractère dans le tableau de la ligne de fichier
+			pLigneFichier[uiCompteur] = cCaractere; // on place le caractère dans le tableau de la ligne de fichier
 			uiCompteur++;
 		}
 
-		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier3, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
-		delete[] pLigneFichier3;
+		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
+		delete[] pLigneFichier;
 
 		if (!STRTest.STRChainesEgales(pINTMatriceCorrecte, pLigneFichierExtraite))
 		{
@@ -125,9 +119,8 @@ CInteraction::CInteraction(char *pNomFichier)
 
 		uiCompteur = 0; // réinitialisation à 0 du compteur
 		cCaractere = 'a'; // réinitialisation du caractère
-		char *pLigneFichier4 = new char[100];
 
-		/* création du tableau de la matrice*/
+		/* création du tableau de la matrice */
 		pINTTab = new double*[uiINTNbColonnes];
 		for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiINTNbLignes; uiBoucleLigne++)
 			pINTTab[uiBoucleLigne] = new double[uiINTNbColonnes];

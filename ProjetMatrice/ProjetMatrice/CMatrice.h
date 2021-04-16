@@ -19,7 +19,7 @@ public:
 	~CMatrice<MType>();                                   //destructeur
 
 	CMatrice MATCalculerTranspose();						//ok				//calcule la transposée
-	void MATAfficherMatrice();								//ok				//affichage de la matrice
+	void MATAfficherMatrice(char *nomMatrice);								//ok				//affichage de la matrice
 	void MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur);           //ok              //changement d'une valeur
 	CMatrice & operator*(MType rNombre);                    //ok				//multiplication par une constante
 	CMatrice & operator/(MType rNombre);                    //ok				//division par une constante
@@ -103,18 +103,18 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 }
 
 template<class MType>
-inline void CMatrice<MType>::MATAfficherMatrice()
+inline void CMatrice<MType>::MATAfficherMatrice(char *nomMatrice)
 {
-	cout << "M = [ ";
+	cout << nomMatrice << " = [\n";
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
 		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			cout << pMATTableau[uiBoucleLigne][uiBoucleColonne] << " ";
+			cout << pMATTableau[uiBoucleLigne][uiBoucleColonne] << "\t ";
 		}
 		cout << endl;
 	}
-	cout << " ]" << endl;
+	cout << " ]\n" << endl;
 }
 
 template<class MType>

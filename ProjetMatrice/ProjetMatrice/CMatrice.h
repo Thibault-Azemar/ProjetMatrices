@@ -14,7 +14,7 @@ private:
 
 public:
 	CMatrice<MType>();                                     //ok					//constructeur par défaut
-	CMatrice<MType>(CMatrice &MATarg);					   //ok mais exeption a gerer					//constructeur de recopie
+	CMatrice<MType>(CMatrice *MATarg);					   //ok mais exeption a gerer					//constructeur de recopie
 	CMatrice<MType>(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pMATTableau); //constructeur avec paramètres
 	~CMatrice<MType>();                                   //destructeur
 
@@ -23,25 +23,25 @@ public:
 	void MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur);           //ok              //changement d'une valeur
 	CMatrice & operator*(MType rNombre);                    //ok				//multiplication par une constante
 	CMatrice & operator/(MType rNombre);                    //ok				//division par une constante
-	CMatrice & operator+(CMatrice &MATarg);                 //ok				//addition de deux matrices
-	CMatrice & operator*(CMatrice &MATarg);										//multiplication de deux matrices
-	CMatrice & operator-(CMatrice &MATarg);                 //ok				//soustraction de deux matrices
+	CMatrice & operator+(CMatrice MATarg);                 //ok				//addition de deux matrices
+	CMatrice & operator*(CMatrice MATarg);										//multiplication de deux matrices
+	CMatrice & operator-(CMatrice MATarg);                 //ok				//soustraction de deux matrices
 };
 
 template<class MType>
 inline CMatrice<MType>::CMatrice()
 {
-	uiMATNbLignes = 0;
-	uiMATNbColonnes = 0;
+	uiMATNbLignes = 1;
+	uiMATNbColonnes = 1;
 	pMATTableau = nullptr;
 }
 
 template<class MType>
-inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
+inline CMatrice<MType>::CMatrice(CMatrice *MATarg)
 {
 	uiMATNbLignes = MATarg.uiMATNbLignes;
 	uiMATNbColonnes = MATarg.uiMATNbColonnes;
-	pMATTableau = new MType*[uiMATNbLignes];
+	pMATTableau = new MType*[MATarg.uiMATNbLignes];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pMATTableau[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
@@ -145,7 +145,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(MType rNombre)
 		}
 	}
 	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
-	MATmultiplication.MATAfficherMatrice();
+	//MATmultiplication.MATAfficherMatrice();
 	return MATmultiplication;
 }
 
@@ -175,7 +175,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType rNombre)
 }
 
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice &MATarg)
+inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
@@ -202,7 +202,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice &MATarg)
 }
 
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice &MATarg)
+inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
 	{
@@ -231,13 +231,13 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice &MATarg)
 		}
 	}
 	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
-	MATmultiplication.MATAfficherMatrice();
+	//MATmultiplication.MATAfficherMatrice();
 	return MATmultiplication;
 }
 
 
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice & MATarg)
+inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{

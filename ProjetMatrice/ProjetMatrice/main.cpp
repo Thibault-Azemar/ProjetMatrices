@@ -22,7 +22,7 @@ int main()
 	}
 	CMatrice<double> MATObjet(uiLigne, uiColonne, pTab);
 
-	MATObjet.MATAfficherMatrice();
+	//MATObjet.MATAfficherMatrice();
 	
 	double** pTab2 = new double*[uiColonne];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiLigne; uiBoucleLigne++)
@@ -36,14 +36,17 @@ int main()
 			pTab2[uiBoucleLigne][uiBoucleColonne] = 1;
 		}
 	}
-
+	
 	CMatrice<double> MATObjet2(uiLigne, uiColonne, pTab2);
-	MATObjet2.MATAfficherMatrice();
+	//MATObjet2.MATAfficherMatrice();
 	CMatrice<double> MATObjet3(MATObjet2);
-	MATObjet3.MATAfficherMatrice();
+	//MATObjet3.MATAfficherMatrice();
+	
+	CMatrice<double> MATobj4 = MATObjet *3;
 
-	CMatrice<double> MATobj4 =  MATObjet * 3;
+
 	MATobj4.MATAfficherMatrice();
+
 	/*MATObjet.MATModifValeur(1, 2, 5);
 	MATObjet.MATModifValeur(1, 1, 6);
 	MATObjet.MATModifValeur(2, 1, -1);

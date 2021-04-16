@@ -102,11 +102,80 @@ CInteraction::CInteraction(char *pNomFichier)
 		pLigneFichierExtraite = STRTest.STRExtraireChaine(pNombreColonnesTrouve, 0, uiCompteur + 1); // le nombre se trouve après le "="
 		uiINTNbColonnes = atoi(pLigneFichierExtraite); // conversion de la chaîne de caractère en nombre entier
 
-		cout << "Nombre de lignes : " << uiINTNbLignes << endl;
-		cout << "Nombre de colonnes : " << uiINTNbColonnes << endl;
+		uiCompteur = 0; // réinitialisation à 0 du compteur
+		cCaractere = 'a'; // réinitialisation du caractère
+		char *pLigneFichier3 = new char[100];
+
+		/* 4. On est sur la quatrième ligne du fichier censée déclarer */
+		while (cCaractere != '\n') // tant qu'on est pas à la fin de la ligne
+		{
+			fichier.get(cCaractere); // on récupère le caractère de la ligne du fichier
+			pLigneFichier3[uiCompteur] = cCaractere; // on place le caractère dans le tableau de la ligne de fichier
+			uiCompteur++;
+		}
+
+		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier3, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
+		delete[] pLigneFichier3;
+
+		if (!STRTest.STRChainesEgales(pINTMatriceCorrecte, pLigneFichierExtraite))
+		{
+			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de colonnes
+			// trow exception
+		}
+
+		uiCompteur = 0; // réinitialisation à 0 du compteur
+		cCaractere = 'a'; // réinitialisation du caractère
+		char *pLigneFichier4 = new char[100];
+
+		/* création du tableau de la matrice*/
+		pINTTab = new double*[uiINTNbColonnes];
+		for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiINTNbLignes; uiBoucleLigne++)
+			pINTTab[uiBoucleLigne] = new double[uiINTNbColonnes];
+
+
+		/* 5. On est sur les lignes 5 à 5 + uiINTNbLignes du fichier censée déclarer */
+		unsigned int uiLigne = 0, uiColonne = 0;
+		while (cCaractere != ']' && (uiLigne != uiINTNbLignes && uiColonne != uiINTNbColonnes))
+		{
+			cCaractere = 'a';
+			char *ptest = new char[10];
+			unsigned int i = 0;
+			while (cCaractere != ' ' && cCaractere != '\n') // boucle pour récupèrer un nombre double
+			{
+				fichier.get(cCaractere);
+				ptest[i] = cCaractere;
+				i++;
+			}
+			pLigneFichierExtraite = STRTest.STRExtraireChaine(ptest, 0, i);
+			pINTTab[uiLigne][uiColonne] = atof(pLigneFichierExtraite);
+			if (cCaractere == ' ')
+			{
+				uiColonne++;
+			}
+			else
+			{
+				uiLigne++;
+				uiColonne = 0;
+			}
+		}
 
 		fichier.close();
 	}
 	else
 		cerr << "Impossible d'ouvrir le fichier." << endl;
+}
+
+int CInteraction::INTGetNbLignes()
+{
+	return uiINTNbLignes;
+}
+
+int CInteraction::INTGetNbColonnes()
+{
+	return uiINTNbColonnes;
+}
+
+double** CInteraction::INTGetTab()
+{
+	return pINTTab;
 }

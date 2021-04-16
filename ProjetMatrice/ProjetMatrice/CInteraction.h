@@ -16,13 +16,14 @@ private:
 	char pINTTypeMatriceCorrecte[19] = "TypeMatrice=double";
 	char pINTLigneCorrecte[10] = "NBLignes=";
 	char pINTColonneCorrecte[12] = "NBColonnes=";
+	char pINTMatriceCorrecte[10] = "Matrice=[";
 public:
 	CInteraction();
 	CInteraction(char *pNomFichier);
+
+	int INTGetNbLignes();
+	int INTGetNbColonnes();
+	double **INTGetTab();
 };
-
-
-
-
 
 

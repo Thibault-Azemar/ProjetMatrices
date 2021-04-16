@@ -10,7 +10,7 @@ CInteraction::CInteraction(char *pNomFichier)
 {
 	ifstream fichier(pNomFichier, ios::in);  // on ouvre en lecture
 
-	if (fichier)  // si l'ouverture a fonctionné
+	if (fichier) // si l'ouverture a fonctionné
 	{
 		unsigned int uiCompteur = 0;
 		char cCaractere = 'a'; // caractere à récupérer sur la ligne du fichier
@@ -34,9 +34,9 @@ CInteraction::CInteraction(char *pNomFichier)
 			// trow exception
 		}
 
-		uiCompteur = 0; // réinitialisation à 0 du compteur
 
 		/* 2. On est sur la deuxième ligne du fichier censée contenir le nombre de lignes */
+		uiCompteur = 0; // réinitialisation à 0 du compteur
 		while (cCaractere != '=') // tant qu'on est pas à la fin de la ligne
 		{
 			fichier.get(cCaractere); // on récupère le caractère de la ligne du fichier
@@ -53,22 +53,20 @@ CInteraction::CInteraction(char *pNomFichier)
 		}
 
 		/* on récupère le nombre de lignes */
-		char *pNombreLignesTrouve = new char[10];
 		uiCompteur = 0;
 		while (cCaractere != '\n')
 		{
 			fichier.get(cCaractere);
-			pNombreLignesTrouve[uiCompteur] = cCaractere;
+			pLigneFichier[uiCompteur] = cCaractere;
 			uiCompteur++;
 		}
 
-		pLigneFichierExtraite = STRTest.STRExtraireChaine(pNombreLignesTrouve, 0, uiCompteur + 1); // le nombre se trouve après le "="
+		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur + 1); // le nombre se trouve après le "="
 		uiINTNbLignes = atoi(pLigneFichierExtraite); // conversion de la chaîne de caractère en nombre entier
 
 
-		uiCompteur = 0; // réinitialisation à 0 du compteur
-
 		/* 3. On est sur la troisième ligne du fichier censée contenir le nombre de colonnes */
+		uiCompteur = 0; // réinitialisation à 0 du compteur
 		while (cCaractere != '=') // tant qu'on est pas à la fin de la ligne
 		{
 			fichier.get(cCaractere); // on récupère le caractère de la ligne du fichier
@@ -84,23 +82,22 @@ CInteraction::CInteraction(char *pNomFichier)
 			// trow exception
 		}
 
-		/* on récupère le nombre de lignes */
-		char *pNombreColonnesTrouve = new char[10];
+		/* on récupère le nombre de colonnes */
 		uiCompteur = 0;
 		while (cCaractere != '\n')
 		{
 			fichier.get(cCaractere);
-			pNombreColonnesTrouve[uiCompteur] = cCaractere;
+			pLigneFichier[uiCompteur] = cCaractere;
 			uiCompteur++;
 		}
 
-		pLigneFichierExtraite = STRTest.STRExtraireChaine(pNombreColonnesTrouve, 0, uiCompteur + 1); // le nombre se trouve après le "="
+		pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur + 1); // le nombre se trouve après le "="
 		uiINTNbColonnes = atoi(pLigneFichierExtraite); // conversion de la chaîne de caractère en nombre entier
 
+
+		/* 4. On est sur la quatrième ligne du fichier censée déclarer "Matrice=[" */
 		uiCompteur = 0; // réinitialisation à 0 du compteur
 		cCaractere = 'a'; // réinitialisation du caractère
-
-		/* 4. On est sur la quatrième ligne du fichier censée déclarer */
 		while (cCaractere != '\n') // tant qu'on est pas à la fin de la ligne
 		{
 			fichier.get(cCaractere); // on récupère le caractère de la ligne du fichier
@@ -117,9 +114,6 @@ CInteraction::CInteraction(char *pNomFichier)
 			// trow exception
 		}
 
-		uiCompteur = 0; // réinitialisation à 0 du compteur
-		cCaractere = 'a'; // réinitialisation du caractère
-
 		/* création du tableau de la matrice */
 		pINTTab = new double*[uiINTNbColonnes];
 		for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiINTNbLignes; uiBoucleLigne++)
@@ -127,30 +121,38 @@ CInteraction::CInteraction(char *pNomFichier)
 
 
 		/* 5. On est sur les lignes 5 à 5 + uiINTNbLignes du fichier censée déclarer */
+		uiCompteur = 0; // réinitialisation à 0 du compteur
+		cCaractere = 'a'; // réinitialisation du caractère
 		unsigned int uiLigne = 0, uiColonne = 0;
-		while (cCaractere != ']' && (uiLigne != uiINTNbLignes && uiColonne != uiINTNbColonnes))
+		while (cCaractere != ']' && (uiLigne != uiINTNbLignes && uiColonne != uiINTNbColonnes)) // la boucle s'arrête quand on détecte ']' ou quand on a le nombre de lignes et de colonnes exactes
 		{
-			cCaractere = 'a';
-			char *ptest = new char[10];
-			unsigned int i = 0;
+			cCaractere = 'a'; // réinitialisation du caractère
+			char *pNombreTemp = new char[10]; // le nombre va d'abord être récupérer sous forme de tableau de chaîne puis être converti en float
+			unsigned int uiTailleNombreChaine = 0; // la taille du nombre tant que celui-ci est un tableau de char
 			while (cCaractere != ' ' && cCaractere != '\n') // boucle pour récupèrer un nombre double
 			{
 				fichier.get(cCaractere);
-				ptest[i] = cCaractere;
-				i++;
+				pNombreTemp[uiTailleNombreChaine] = cCaractere;
+				uiTailleNombreChaine++;
 			}
-			pLigneFichierExtraite = STRTest.STRExtraireChaine(ptest, 0, i);
-			pINTTab[uiLigne][uiColonne] = atof(pLigneFichierExtraite);
+
+			pLigneFichierExtraite = STRTest.STRExtraireChaine(pNombreTemp, 0, uiTailleNombreChaine); // récupération de la ligne
+			pINTTab[uiLigne][uiColonne] = atof(pLigneFichierExtraite); // conversion et ajout au tableau 2D
+
 			if (cCaractere == ' ')
 			{
+				// si le caractère est un espace alors on passe au nombre suivant sur la même ligne et donc le nombre de colonne augmente
 				uiColonne++;
 			}
 			else
 			{
+				// sinon, c'est un caractère de retour à la ligne donc on passe à la ligne suivante et on repasse à la colonne 0
 				uiLigne++;
 				uiColonne = 0;
 			}
 		}
+
+		delete[] pLigneFichierExtraite;
 
 		fichier.close();
 	}

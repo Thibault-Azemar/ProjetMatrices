@@ -6,3 +6,4 @@ public:
 	char *STRExtraireChaine(char *pChaineArg, unsigned int uiDebutChaine, unsigned int uiFinChaine);
 };
 
+

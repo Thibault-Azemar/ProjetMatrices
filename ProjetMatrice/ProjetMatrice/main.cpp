@@ -37,23 +37,26 @@ int main()
 		}
 	}
 	
-	CMatrice<double> MATObjet2(uiLigne, uiColonne, pTab2);
+	CMatrice<double> MATObjet2(uiLigne + 2, uiColonne, pTab2);
 	//MATObjet2.MATAfficherMatrice();
 	CMatrice<double> MATObjet3(MATObjet2);
 	//MATObjet3.MATAfficherMatrice();
 	
-	CMatrice<double> MATobj4 = MATObjet *3;
+	//CMatrice<double> MATobj4 = MATObjet *3;
 
 
-	MATobj4.MATAfficherMatrice();
+	//MATobj4.MATAfficherMatrice();
 
-	/*MATObjet.MATModifValeur(1, 2, 5);
+	MATObjet.MATModifValeur(1, 2, 5);
 	MATObjet.MATModifValeur(1, 1, 6);
 	MATObjet.MATModifValeur(2, 1, -1);
 	MATObjet.MATModifValeur(1, 3, 9);
 	MATObjet.MATCalculerTranspose();
-	
-	MATObjet.MATAfficherMatrice();*/
+	CMatrice<double> MATobj5;
+	MATObjet2.MATAfficherMatrice();
+	MATObjet.MATAfficherMatrice();
+	MATobj5 = MATObjet2 * MATObjet;
+	MATobj5.MATAfficherMatrice();
 	/*
 	try {
 		MATobj3.MATAfficherMatrice();

@@ -98,7 +98,7 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 		}
 	}
 	CMatrice MAT1(uiMATNbLignes, uiMATNbColonnes, pTab);
-	MAT1.MATAfficherMatrice();
+	//MAT1.MATAfficherMatrice();
 	return MAT1;
 }
 
@@ -210,26 +210,25 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
 		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");  //PAS LA BONNE EXCEPTION A CHANGER
 		throw (EXCobj);
 	}
+	unsigned int uiDimension = uiMATNbColonnes;
 	
 	MType** pTab = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
+		pTab[uiBoucleLigne] = new MType[MATarg.uiMATNbColonnes];
 
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
 		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = 0;
+			MType temp = 0;
+			for (unsigned int uiBoucleDimension = 0; uiBoucleDimension < uiDimension; uiBoucleDimension++) 
+			{
+				 temp += this->pMATTableau[uiBoucleLigne][uiBoucleDimension] * MATarg.pMATTableau[uiBoucleDimension][uiBoucleColonne];
+			}
+			pTab[uiBoucleLigne][uiBoucleColonne] = temp;
 		}
 	}
-
-	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-	{
-		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		{
-			pTab[uiBoucleLigne][uiBoucleColonne] += pMATTableau[uiBoucleLigne][uiBoucleColonne] * MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
-		}
-	}
+	
 	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
 	//MATmultiplication.MATAfficherMatrice();
 	return MATmultiplication;

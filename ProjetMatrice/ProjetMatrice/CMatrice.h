@@ -17,8 +17,10 @@ public:
 	CMatrice<MType>(CMatrice &MATarg);                          //constructeur de recopie
 	CMatrice<MType>(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pMATTableau); //constructeur avec paramètres
 	~CMatrice<MType>();                                   //destructeur
+
 	CMatrice MATCalculerTranspose();               //calcule la transposée
 	void MATAfficherMatrice();                     //affichage de la matrice
+	void MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur);                         //changement d'une valeur
 	CMatrice & operator*(MType &rNombre);                    //multiplication par une constante
 	CMatrice & operator/(MType &rNombre);                    //division par une constante
 	CMatrice & operator+(CMatrice &MATarg);                  //addition de deux matrices
@@ -106,6 +108,18 @@ inline void CMatrice<MType>::MATAfficherMatrice()
 		cout << endl;
 	}
 	cout << " ]" << endl;
+}
+
+template<class MType>
+inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur)
+{
+	if (uiChoixLigne > uiMATNbLignes || uiChoixColonne > uiMATNbColonnes) 
+	{
+		CException EXCobj;
+		EXCobj.EXCmodifier_desc("Choix en dehors de la taille de la matrice");
+		throw (EXCobj);
+	}
+	pMATTableau[uiChoixLigne][uiChoixColonne] = valeur;
 }
 
 

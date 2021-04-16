@@ -7,7 +7,7 @@
 int main()
 {
 	unsigned int uiLigne = 3;
-	unsigned int uiColonne = 4;
+	unsigned int uiColonne = 3;
 	double** pTab = new double*[uiColonne];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiLigne; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new double[uiColonne];
@@ -39,9 +39,18 @@ int main()
 
 	CMatrice<double> MATObjet2(uiLigne, uiColonne, pTab2);
 	MATObjet2.MATAfficherMatrice();
+	CMatrice<double> MATObjet3(MATObjet2);
+	MATObjet3.MATAfficherMatrice();
 
-	//CMatrice<double> MATobj3 = MATObjet + MATObjet2;
+	CMatrice<double> MATobj4 =  MATObjet * 3;
+	MATobj4.MATAfficherMatrice();
+	/*MATObjet.MATModifValeur(1, 2, 5);
+	MATObjet.MATModifValeur(1, 1, 6);
+	MATObjet.MATModifValeur(2, 1, -1);
+	MATObjet.MATModifValeur(1, 3, 9);
+	MATObjet.MATCalculerTranspose();
 	
+	MATObjet.MATAfficherMatrice();*/
 	/*
 	try {
 		MATobj3.MATAfficherMatrice();

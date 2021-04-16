@@ -13,19 +13,19 @@ private:
 	MType** pMATTableau; //MType[][]* pTableau //tableau à double entrée de pointeur
 
 public:
-	CMatrice<MType>();                                    //constructeur par défaut
-	CMatrice<MType>(CMatrice &MATarg);                          //constructeur de recopie
+	CMatrice<MType>();                                     //ok					//constructeur par défaut
+	CMatrice<MType>(CMatrice &MATarg);					   //ok mais exeption a gerer					//constructeur de recopie
 	CMatrice<MType>(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pMATTableau); //constructeur avec paramètres
 	~CMatrice<MType>();                                   //destructeur
 
-	CMatrice MATCalculerTranspose();               //calcule la transposée
-	void MATAfficherMatrice();                     //affichage de la matrice
-	void MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur);                         //changement d'une valeur
-	CMatrice & operator*(MType &rNombre);                    //multiplication par une constante
-	CMatrice & operator/(MType &rNombre);                    //division par une constante
-	CMatrice & operator+(CMatrice &MATarg);                  //addition de deux matrices
-	CMatrice & operator*(CMatrice &MATarg);                  //multiplication de deux matrices
-	CMatrice & operator-(CMatrice &MATarg);                  //soustraction de deux matrices
+	CMatrice MATCalculerTranspose();						//ok				//calcule la transposée
+	void MATAfficherMatrice();								//ok				//affichage de la matrice
+	void MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur);           //ok              //changement d'une valeur
+	CMatrice & operator*(MType rNombre);                    //ok				//multiplication par une constante
+	CMatrice & operator/(MType rNombre);                    //ok				//division par une constante
+	CMatrice & operator+(CMatrice &MATarg);                 //ok				//addition de deux matrices
+	CMatrice & operator*(CMatrice &MATarg);										//multiplication de deux matrices
+	CMatrice & operator-(CMatrice &MATarg);                 //ok				//soustraction de deux matrices
 };
 
 template<class MType>
@@ -41,7 +41,7 @@ inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
 {
 	uiMATNbLignes = MATarg.uiMATNbLignes;
 	uiMATNbColonnes = MATarg.uiMATNbColonnes;
-	pMATTableau = new MType*[uiMATNbColonnes];
+	pMATTableau = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pMATTableau[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
@@ -59,7 +59,7 @@ inline CMatrice<MType>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColon
 {
 	uiMATNbLignes = uiNbLignes;
 	uiMATNbColonnes = uiNbColonnes;
-	pMATTableau = new MType*[uiMATNbColonnes];
+	pMATTableau = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pMATTableau[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
@@ -80,18 +80,25 @@ inline CMatrice<MType>::~CMatrice()
 template<class MType>
 inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 {
-	MType** pTab = new MType*[uiMATNbColonnes];
-	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
+	if (uiMATNbColonnes != uiMATNbLignes)
+	{
+		CException EXCobj;
+		EXCobj.EXCmodifier_desc("Matrice non caré");
+		throw (EXCobj);
+	}
+	MType** pTab = new MType*[uiMATNbLignes];
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
 		for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pMATTableau[uiBoucleColonne][uiBoucleLigne] = pTab[uiBoucleLigne][uiBoucleColonne];
+			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleColonne][uiBoucleLigne];
 		}
 	}
-	CMatrice MAT1(uiMATNbColonnes, uiMATNbLignes, pTab);
+	CMatrice MAT1(uiMATNbLignes, uiMATNbColonnes, pTab);
+	MAT1.MATAfficherMatrice();
 	return MAT1;
 }
 
@@ -119,16 +126,16 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
 		EXCobj.EXCmodifier_desc("Choix en dehors de la taille de la matrice");
 		throw (EXCobj);
 	}
-	pMATTableau[uiChoixLigne][uiChoixColonne] = valeur;
+	pMATTableau[uiChoixLigne-1][uiChoixColonne-1] = valeur;
 }
 
 
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator*(MType &rNombre)
+inline CMatrice<MType> & CMatrice<MType>::operator*(MType rNombre)
 {
-	MType** pTab = new MType*[uiMATNbColonnes];
-	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
+	MType** pTab = new MType*[uiMATNbLignes];
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
@@ -138,18 +145,20 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(MType &rNombre)
 		}
 	}
 	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
+	MATmultiplication.MATAfficherMatrice();
 	return MATmultiplication;
 }
 
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator/(MType &rNombre)
+inline CMatrice<MType> & CMatrice<MType>::operator/(MType rNombre)
 {
 	if (rNombre == 0)
 	{
-		cout << "Impossible de diviser par 0." << endl;
-		return;
+		CException EXCobj;
+		EXCobj.EXCmodifier_desc("Division impossible");
+		throw (EXCobj);
 	}
-	MType** pTab = new MType*[uiMATNbColonnes];
+	MType** pTab = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		pTab[uiBoucleColonne] = new double[uiMATNbLignes];
 
@@ -161,6 +170,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType &rNombre)
 		}
 	}
 	CMatrice MATdivision(uiMATNbLignes, uiMATNbColonnes, pTab);
+	MATdivision.MATAfficherMatrice();
 	return MATdivision;
 }
 
@@ -174,9 +184,9 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice &MATarg)
 		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");
 		throw (EXCobj);
 	}
-	MType** pTab = new MType*[uiMATNbColonnes];
-	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
+	MType** pTab = new MType*[uiMATNbLignes];
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
@@ -185,16 +195,25 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice &MATarg)
 			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] + MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
-	CMatrice MATaddition(uiMATNbColonnes, uiMATNbLignes, pTab);
+	CMatrice MATaddition(uiMATNbLignes, uiMATNbColonnes, pTab);
+	//MATaddition.MATAfficherMatrice();
 	return MATaddition;
+
 }
 
 template<class MType>
 inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice &MATarg)
 {
-	MType** pTab = new MType*[uiMATNbColonnes];
-	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
+	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
+	{
+		CException EXCobj;
+		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");  //PAS LA BONNE EXCEPTION A CHANGER
+		throw (EXCobj);
+	}
+	
+	MType** pTab = new MType*[uiMATNbLignes];
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
@@ -212,6 +231,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice &MATarg)
 		}
 	}
 	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
+	MATmultiplication.MATAfficherMatrice();
 	return MATmultiplication;
 }
 
@@ -221,12 +241,15 @@ inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice & MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		cout << "Impossible de soustraire ces deux matrices." << endl;
-		return;
+		//cout << "Impossible de soustraire ces deux matrices." << endl;
+		CException EXCobj;
+		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");
+		throw (EXCobj);
+		
 	}
-	MType** pTab = new MType*[uiMATNbColonnes];
-	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		pTab[uiBoucleColonne] = new MType[uiMATNbLignes];
+	MType** pTab = new MType*[uiMATNbLignes];
+	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
@@ -236,6 +259,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice & MATarg)
 		}
 	}
 	CMatrice MATsoustraction(uiMATNbLignes, uiMATNbColonnes, pTab);
+	//MATsoustraction.MATAfficherMatrice();
 	return MATsoustraction;
 }
 

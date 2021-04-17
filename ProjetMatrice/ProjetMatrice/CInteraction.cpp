@@ -149,7 +149,6 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 
 		pLigneFichierExtraite = STRTest.STRExtraireChaine(pNombreTemp, 0, uiTailleNombreChaine); // récupération de la ligne
 		pINTTab[uiLigne][uiColonne] = atof(pLigneFichierExtraite); // conversion et ajout au tableau 2D
-		cout << pINTTab[uiLigne][uiColonne] << endl;
 
 		if (cCaractere == ' ')
 		{
@@ -172,7 +171,7 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 	delete[] pLigneFichierExtraite;
 
 	fichier.close();
-
+	
 	CMatrice<double> MATobj(uiINTNbLignes, uiINTNbColonnes, pINTTab);
 	return MATobj;
 }

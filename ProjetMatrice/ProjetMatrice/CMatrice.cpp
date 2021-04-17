@@ -46,15 +46,15 @@ inline CMatrice<MType>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColon
 	uiMATNbLignes = uiNbLignes;
 	uiMATNbColonnes = uiNbColonnes;
 	pMATTableau = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pMATTableau[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			pMATTableau[uiBoucleLigne][uiBoucleColonne] = pTab[uiBoucleLigne][uiBoucleColonne];
 		}
@@ -91,15 +91,15 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleColonne][uiBoucleLigne];
 		}
@@ -116,13 +116,13 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 template<class MType>
 inline void CMatrice<MType>::MATAfficherMatrice(char *pNomMatrice)
 {
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
 
 	cout << pNomMatrice << " = [\n";
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			cout << pMATTableau[uiBoucleLigne][uiBoucleColonne] << "\t ";
 		}
@@ -157,15 +157,15 @@ template<class MType>
 inline CMatrice<MType> & CMatrice<MType>::operator*(MType valeur)
 {
 	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			pTab[uiBoucleLigne][uiBoucleColonne] = valeur * pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
@@ -192,19 +192,19 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
 	unsigned int uiDimension = uiMATNbColonnes;
 
 	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
-	unsigned int uiBoucleDimension = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
+	unsigned int uiBoucleDimension;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new MType[MATarg.uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			MType temp = 0;
-			for (uiBoucleDimension; uiBoucleDimension < uiDimension; uiBoucleDimension++)
+			for (uiBoucleDimension = 0 ; uiBoucleDimension < uiDimension; uiBoucleDimension++)
 			{
 				temp += this->pMATTableau[uiBoucleLigne][uiBoucleDimension] * MATarg.pMATTableau[uiBoucleDimension][uiBoucleColonne];
 			}
@@ -232,15 +232,15 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType valeur)
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new double[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] / valeur;
 		}
@@ -265,15 +265,15 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] + MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
@@ -300,15 +300,15 @@ inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice MATarg)
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] - MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include "CString.h"
+#include "CMatrice.h"
+#include "CException.h"
 
 using namespace std;
 
@@ -20,7 +22,7 @@ private:
 public:
 	CInteraction();
 	CInteraction(char *pNomFichier);
-
+	CMatrice<double> INTGetMatrice(char *pNomFichier);
 	int INTGetNbLignes();
 	int INTGetNbColonnes();
 	double **INTGetTab();

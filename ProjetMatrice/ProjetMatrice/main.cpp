@@ -12,19 +12,20 @@ int main()
 	
 	char fichier[14] = "matrice.txt";
 	char nomMatrice1[5] = "MAT1";
-	CInteraction Objet1;
+	CMatrice<double> MAT1;
 	try {
-		CInteraction Objet1(fichier);
+		CInteraction Objet1;
+		MAT1 = Objet1.INTGetMatrice(fichier);
 	}
 	catch (CException EXCLevee)
 	{
 		cout << EXCLevee.EXCavoir_desc();
 	}
 	
-	CMatrice<double> MAT1(Objet1.INTGetNbLignes(), Objet1.INTGetNbColonnes(), Objet1.INTGetTab());
 	MAT1.MATAfficherMatrice(nomMatrice1);
 	
 	char fichier2[15] = "matrice2.txt";
+	/*
 	CInteraction Objet2;
 	
 	try {
@@ -34,9 +35,18 @@ int main()
 	{
 		cout << EXCLevee.EXCavoir_desc();
 	}
+	*/
+	CMatrice<double> MAT2;
+	try {
+		CInteraction Objet2;
+		MAT2 = Objet2.INTGetMatrice(fichier2);
+	}
+	catch (CException EXCLevee)
+	{
+		cout << EXCLevee.EXCavoir_desc();
+	}
 	
 	char nomMatrice2[5] = "MAT2";
-	CMatrice<double> MAT2(Objet2.INTGetNbLignes(), Objet2.INTGetNbColonnes(), Objet2.INTGetTab());
 	MAT2.MATAfficherMatrice(nomMatrice2);
 
 

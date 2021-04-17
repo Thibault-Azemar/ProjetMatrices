@@ -152,6 +152,13 @@ CInteraction::CInteraction(char *pNomFichier)
 			}
 		}
 
+		if (uiLigne != uiINTNbLignes || uiColonne != uiINTNbColonnes)
+		{
+			cout << "Erreur: Nombre de lignes ou colonnes incohérents." << endl;
+			cout << "Veuillez ne pas mettre d'espace avant ou après chaque nombre, seules les tabulations sont autorisées." << endl;
+			// lever exception
+		}
+
 		delete[] pLigneFichierExtraite;
 
 		fichier.close();

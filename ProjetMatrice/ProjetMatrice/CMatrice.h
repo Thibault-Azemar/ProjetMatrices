@@ -124,7 +124,7 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
 {
 	if (uiChoixLigne > uiMATNbLignes || uiChoixColonne > uiMATNbColonnes) 
 	{
-		throw CException(Mat_Taille_diff, "Choix en dehors de la taille de la matrice");
+		throw CException(Mat_Taille_diff, "Choix en dehors de la taille de la matrice\n");
 	}
 	pMATTableau[uiChoixLigne-1][uiChoixColonne-1] = valeur;
 }
@@ -168,7 +168,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType rNombre)
 		}
 	}
 	CMatrice MATdivision(uiMATNbLignes, uiMATNbColonnes, pTab);
-	MATdivision.MATAfficherMatrice();
+	//MATdivision.MATAfficherMatrice();
 	return MATdivision;
 }
 

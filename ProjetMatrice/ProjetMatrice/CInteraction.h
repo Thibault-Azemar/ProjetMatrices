@@ -16,7 +16,7 @@ private:
 	char pINTTypeMatriceCorrecte[19] = "TypeMatrice=double";
 	char pINTLigneCorrecte[10] = "NBLignes=";
 	char pINTColonneCorrecte[12] = "NBColonnes=";
-	char pINTMatriceCorrecte[10] = "Matrice=[";
+	char pINTMatriceCorrecte[12] = "Matrice=[";
 public:
 	CInteraction();
 	CInteraction(char *pNomFichier);

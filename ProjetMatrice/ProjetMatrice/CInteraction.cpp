@@ -1,5 +1,9 @@
 #include "CInteraction.h"
+#include "CException.h"
 
+#define Mat_Mauvais_Type 4
+#define Syntaxe_Incorrecte 5
+#define Fichier_Err 6
 
 CInteraction::CInteraction()
 {
@@ -32,6 +36,7 @@ CInteraction::CInteraction(char *pNomFichier)
 		{
 			// alors le tableau n'est pas de type double
 			// trow exception
+			//throw CException(Mat_Mauvais_Type, "Choix en dehors du type de la matrice\n");
 		}
 
 
@@ -50,6 +55,7 @@ CInteraction::CInteraction(char *pNomFichier)
 		{
 			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de lignes
 			// trow exception
+			//throw CException(Syntaxe_Incorrecte, "Syntaxe incorrecte, on ne peut pas recupérer le nombre de lignes(ligne 2)\n");
 		}
 
 		/* on récupère le nombre de lignes */
@@ -80,6 +86,7 @@ CInteraction::CInteraction(char *pNomFichier)
 		{
 			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de colonnes
 			// trow exception
+			//throw CException(Syntaxe_Incorecte, "Syntaxe incorrecte, on ne peut pas recupérer le nombre de colonnes(ligne 3)\n");
 		}
 
 		/* on récupère le nombre de colonnes */
@@ -110,8 +117,9 @@ CInteraction::CInteraction(char *pNomFichier)
 
 		if (!STRTest.STRChainesEgales(pINTMatriceCorrecte, pLigneFichierExtraite))
 		{
-			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de colonnes
+			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer la matrice 
 			// trow exception
+			//throw CException(Syntaxe_Incorecte, "Syntaxe incorrecte, ligne 5 (Matrice=[)\n");
 		}
 
 		/* création du tableau de la matrice */
@@ -143,6 +151,12 @@ CInteraction::CInteraction(char *pNomFichier)
 			{
 				// si le caractère est un espace alors on passe au nombre suivant sur la même ligne et donc le nombre de colonne augmente
 				uiColonne++;
+				if (uiColonne == uiINTNbColonnes)
+				{
+					//cout << "Veuillez ne pas mettre d'espace avant ou après chaque nombre, seules les tabulations sont autorisées." << endl;
+					// lever exception
+					//throw CException(Syntaxe_Incorecte, "Veuillez ne pas mettre d'espace en fin de ligne\n");
+				}
 			}
 			else
 			{
@@ -151,20 +165,13 @@ CInteraction::CInteraction(char *pNomFichier)
 				uiColonne = 0;
 			}
 		}
-
-		if (uiLigne != uiINTNbLignes || uiColonne != uiINTNbColonnes)
-		{
-			cout << "Erreur: Nombre de lignes ou colonnes incohérents." << endl;
-			cout << "Veuillez ne pas mettre d'espace avant ou après chaque nombre, seules les tabulations sont autorisées." << endl;
-			// lever exception
-		}
-
 		delete[] pLigneFichierExtraite;
 
 		fichier.close();
 	}
 	else
 		cerr << "Impossible d'ouvrir le fichier." << endl;
+		//throw CException(Fichier_Err, "Impossible d'ouvrir le fichier.\n");
 }
 
 int CInteraction::INTGetNbLignes()

@@ -3,6 +3,6 @@ NBLignes=3
 NBColonnes=3
 Matrice=[
 	5 4 6
-	1 -2 8                      
+	1 -2 8
 	5.2 -12.56 2
 ]

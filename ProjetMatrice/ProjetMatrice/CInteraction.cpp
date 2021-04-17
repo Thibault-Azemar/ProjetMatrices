@@ -37,7 +37,8 @@ CInteraction::CInteraction(char *pNomFichier)
 		{
 			// alors le tableau n'est pas de type double
 			// trow exception
-			//throw CException(Mat_Mauvais_Type, "Choix en dehors du type de la matrice\n");
+			//char texte[30] =  "Choix en dehors du type de la matrice\n";
+			//throw CException(Mat_Mauvais_Type, texte);
 		}
 
 
@@ -56,7 +57,8 @@ CInteraction::CInteraction(char *pNomFichier)
 		{
 			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de lignes
 			// trow exception
-			//throw CException(Syntaxe_Incorrecte, "Syntaxe incorrecte, on ne peut pas recupérer le nombre de lignes(ligne 2)\n");
+			//char texte[60] = "Syntaxe incorrecte, on ne peut pas recupérer le nombre de lignes(ligne 2)\n";
+			//throw CException(Syntaxe_Incorrecte, texte);
 		}
 
 		/* on récupère le nombre de lignes */
@@ -86,8 +88,8 @@ CInteraction::CInteraction(char *pNomFichier)
 		if (!STRTest.STRChainesEgales(pINTColonneCorrecte, pLigneFichierExtraite))
 		{
 			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de colonnes
-			// trow exception
-			//throw CException(Syntaxe_Incorecte, "Syntaxe incorrecte, on ne peut pas recupérer le nombre de colonnes(ligne 3)\n");
+			//char texte[75] = "Syntaxe incorrecte, on ne peut pas recupérer le nombre de colonnes(ligne 3)\n";
+			//throw CException(Syntaxe_Incorecte, texte);
 		}
 
 		/* on récupère le nombre de colonnes */
@@ -119,7 +121,7 @@ CInteraction::CInteraction(char *pNomFichier)
 		if (!STRTest.STRChainesEgales(pINTMatriceCorrecte, pLigneFichierExtraite))
 		{
 			// alors la syntaxe n'est pas correcte et on ne peut pas récupérer la matrice 
-			// trow exception
+			//char texte[30] = "Syntaxe incorrecte, ligne 5 (Matrice=[)\n";
 			//throw CException(Syntaxe_Incorecte, "Syntaxe incorrecte, ligne 5 (Matrice=[)\n");
 		}
 

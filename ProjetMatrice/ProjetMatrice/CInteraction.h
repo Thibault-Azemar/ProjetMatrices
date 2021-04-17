@@ -6,8 +6,8 @@ class CInteraction
 {
 private:
 	/* récupérations des attributs de la matrice */
-	int uiINTNbLignes;
-	int uiINTNbColonnes;
+	unsigned int uiINTNbLignes;
+	unsigned int uiINTNbColonnes;
 	double **pINTTab;
 
 	/* ce à quoi les lignes de fichier seront comparées */

@@ -4,7 +4,7 @@
 CException::CException()
 {
 	unsigned int uiEXCValeur = 0;
-	string sEXCDesc = "";
+	char *sEXCDesc;
 }
 
 CException::CException(CException * EXPobj)

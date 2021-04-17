@@ -23,9 +23,9 @@ public:
 	CMatrice MATCalculerTranspose();															//calcule la transposée
 	void MATAfficherMatrice(char *pNomMatrice);													//affichage de la matrice
 	void MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur);  //changement d'une valeur
-	CMatrice & operator*(MType Valeur);                    									//multiplication par une constante
+	CMatrice & operator*(MType valeur);                    									//multiplication par une constante
 	CMatrice & operator*(CMatrice MATarg);														//multiplication de deux matrices
-	CMatrice & operator/(MType Valeur);                    									//division par une constante
+	CMatrice & operator/(MType valeur);                    									//division par une constante
 	CMatrice & operator+(CMatrice MATarg);														//addition de deux matrices
 	CMatrice & operator-(CMatrice MATarg);														//soustraction de deux matrices
 };

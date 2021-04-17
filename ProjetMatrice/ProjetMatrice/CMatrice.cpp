@@ -86,8 +86,8 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 {
 	if (uiMATNbColonnes != uiMATNbLignes)
 	{
-		char texte[15] = "matrice non carré\n";
-		throw CException(Mat_Non_Carre, texte);
+		char pTexteException[15] = "Matrice non carré\n";
+		throw CException(Mat_Non_Carre, pTexteException);
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];
@@ -142,8 +142,8 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
 {
 	if (uiChoixLigne > uiMATNbLignes || uiChoixColonne > uiMATNbColonnes)
 	{
-		char texte[30] = "Choix en dehors de la taille de la matrice\n";
-		throw CException(Mat_Taille_diff, texte);
+		char pTexteException[30] = "Choix en dehors de la taille de la matrice\n";
+		throw CException(Mat_Taille_diff, pTexteException);
 	}
 	pMATTableau[uiChoixLigne - 1][uiChoixColonne - 1] = valeur;
 }
@@ -154,7 +154,7 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator*(MType Valeur)
+inline CMatrice<MType> & CMatrice<MType>::operator*(MType valeur)
 {
 	MType** pTab = new MType*[uiMATNbLignes];
 	unsigned int uiBoucleLigne = 0;
@@ -167,7 +167,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(MType Valeur)
 	{
 		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = Valeur * pMATTableau[uiBoucleLigne][uiBoucleColonne];
+			pTab[uiBoucleLigne][uiBoucleColonne] = valeur * pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
 	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
@@ -186,8 +186,8 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
 	{
-		char texte[100] = "Nb Colonnes de la 1ère matrice différent du Nb Lignes de la 2eme matrice\n";
-		throw CException(Mat_Taille_diff, texte);
+		char pTexteException[100] = "Nb Colonnes de la 1ère matrice différent du Nb Lignes de la 2eme matrice\n";
+		throw CException(Mat_Taille_diff, pTexteException);
 	}
 	unsigned int uiDimension = uiMATNbColonnes;
 
@@ -223,12 +223,12 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator/(MType Valeur)
+inline CMatrice<MType> & CMatrice<MType>::operator/(MType valeur)
 {
-	if (rNombre == 0)
+	if (valeur == 0)
 	{
-		char texte[20] = "Division impossible\n";
-		throw CException(Valeur_Non_Valide, texte);
+		char pTexteException[20] = "Division impossible\n";
+		throw CException(Valeur_Non_Valide, pTexteException);
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];
@@ -242,7 +242,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType Valeur)
 	{
 		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] / Valeur;
+			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] / valeur;
 		}
 	}
 	CMatrice MATdivision(uiMATNbLignes, uiMATNbColonnes, pTab);
@@ -260,8 +260,8 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		char texte[45] = "Impossible d'additionner des matrices de taille différente";
-		throw CException(Mat_Taille_diff, texte);
+		char pTexteException[45] = "Impossible d'additionner des matrices de taille différente";
+		throw CException(Mat_Taille_diff, pTexteException);
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];
@@ -295,8 +295,8 @@ inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		char texte[30] = "Matrice de taille différentes\n";
-		throw CException(Mat_Taille_diff, texte);
+		char pTexteException[30] = "Matrice de taille différentes\n";
+		throw CException(Mat_Taille_diff, pTexteException);
 	}
 
 	MType** pTab = new MType*[uiMATNbLignes];

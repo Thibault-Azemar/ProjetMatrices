@@ -16,8 +16,8 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 
 	if (!fichier) // si l'ouverture n'a pas fonctionné
 	{
-		cerr << "Impossible d'ouvrir le fichier." << endl;
-		//throw CException(Fichier_Err, "Impossible d'ouvrir le fichier.\n");
+		char pTexteException[39] = "Impossible d'ouvrir le fichier\n";
+		throw CException(Fichier_Err, pTexteException);
 	}
 
 	unsigned int uiCompteur = 0;
@@ -39,8 +39,8 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 	if (!STRTest.STRChainesEgales(pINTTypeMatriceCorrecte, pLigneFichierExtraite))
 	{
 		// alors le tableau n'est pas de type double
-		// trow exception
-		//throw CException(Mat_Mauvais_Type, "Choix en dehors du type de la matrice\n");
+		char pTexteException[39] = "Choix en dehors du type de la matrice\n";
+		throw CException(Mat_Mauvais_Type, pTexteException);
 	}
 
 
@@ -58,8 +58,8 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 	if (!STRTest.STRChainesEgales(pINTLigneCorrecte, pLigneFichierExtraite))
 	{
 		// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de lignes
-		// trow exception
-		//throw CException(Syntaxe_Incorrecte, "Syntaxe incorrecte, on ne peut pas recupérer le nombre de lignes(ligne 2)\n");
+		char pTexteException[75] = "Syntaxe incorrecte, on ne peut pas recupérer le nombre de lignes(ligne 2)\n";
+		throw CException(Syntaxe_Incorrecte, pTexteException);
 	}
 
 	/* on récupère le nombre de lignes */
@@ -89,8 +89,8 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 	if (!STRTest.STRChainesEgales(pINTColonneCorrecte, pLigneFichierExtraite))
 	{
 		// alors la syntaxe n'est pas correcte et on ne peut pas récupérer le nombre de colonnes
-		// trow exception
-		//throw CException(Syntaxe_Incorecte, "Syntaxe incorrecte, on ne peut pas recupérer le nombre de colonnes(ligne 3)\n");
+		char pTexteException[77] = "Syntaxe incorrecte, on ne peut pas recupérer le nombre de colonnes(ligne 3)\n";
+		throw CException(Syntaxe_Incorrecte, pTexteException);
 	}
 
 	/* on récupère le nombre de colonnes */
@@ -116,13 +116,14 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 		uiCompteur++;
 	}
 
-	pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur + 1); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
+	pLigneFichierExtraite = STRTest.STRExtraireChaine(pLigneFichier, 0, uiCompteur); // appeler cette fonction va permettre de copier la ligne du fichier dans une autre variable
 	delete[] pLigneFichier;
 
 	if (!STRTest.STRChainesEgales(pINTMatriceCorrecte, pLigneFichierExtraite))
 	{
 		// alors la syntaxe n'est pas correcte et on ne peut pas récupérer la matrice 
-		//throw CException(Syntaxe_Incorecte, "Syntaxe incorrecte, ligne 5 (Matrice=[)\n");
+		char pTexteException[41] = "Syntaxe incorrecte, ligne 5 (Matrice=[)\n";
+		throw CException(Syntaxe_Incorrecte, pTexteException);
 	}
 
 	/* création du tableau de la matrice */
@@ -157,8 +158,8 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 			if (uiColonne == uiINTNbColonnes)
 			{
 				//cout << "Veuillez ne pas mettre d'espace avant ou après chaque nombre, seules les tabulations sont autorisées." << endl;
-				// lever exception
-				//throw CException(Syntaxe_Incorecte, "Veuillez ne pas mettre d'espace en fin de ligne\n");
+				char pTexteException[50] = "Veuillez ne pas mettre d'espace en fin de ligne\n";
+				throw CException(Syntaxe_Incorrecte, pTexteException);
 			}
 		}
 		else

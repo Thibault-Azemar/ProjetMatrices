@@ -1,4 +1,3 @@
-#include "CMatrice.h"
 /**
  * @brief construteur par défaut
  */

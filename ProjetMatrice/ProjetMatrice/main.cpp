@@ -56,7 +56,5 @@ int main()
 	{
 		cout << EXCLevee.EXCAvoirDesc();
 	}
-	
-	
 
 }

@@ -71,13 +71,16 @@ inline CMatrice<MType>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColon
 template<class MType>
 inline CMatrice<MType>::~CMatrice()
 {
-	/*unsigned int uiBoucleLigne = uiMATNbLignes;
+	if (pMATTableau != nullptr)
+	{
+	unsigned int uiBoucleLigne ;
 
-	for (uiBoucleLigne ; uiBoucleLigne > 0; uiBoucleLigne--)
+	for (uiBoucleLigne =0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
 			delete[] pMATTableau[uiBoucleLigne];
 	}
-	delete[] pMATTableau;*/
+	delete[] pMATTableau;
+	}
 }
 
 /**

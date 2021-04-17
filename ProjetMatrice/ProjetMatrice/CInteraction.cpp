@@ -186,5 +186,14 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 	fichier.close();
 	
 	CMatrice<double> MATobj(uiINTNbLignes, uiINTNbColonnes, pINTTab);
+
+	unsigned int uiBoucleLigne;
+
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiINTNbLignes; uiBoucleLigne++)
+	{
+		delete[] pINTTab[uiBoucleLigne];
+	}
+	delete[] pINTTab;
+	
 	return MATobj;
 }

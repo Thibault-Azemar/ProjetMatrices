@@ -1,3 +1,4 @@
+#include "CMatrice.h"
 /**
  * @brief construteur par défaut
  */
@@ -154,7 +155,7 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator*(MType valeur)
+inline CMatrice<MType> CMatrice<MType>::operator*(MType valeur)
 {
 	MType** pTab = new MType*[uiMATNbLignes];
 	unsigned int uiBoucleLigne;
@@ -182,7 +183,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(MType valeur)
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
+inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
 	{
@@ -223,7 +224,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator/(MType valeur)
+inline CMatrice<MType> CMatrice<MType>::operator/(MType valeur)
 {
 	if (valeur == 0)
 	{
@@ -256,31 +257,32 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType valeur)
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
+inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice MATarg)
 {
-	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
+	if (uiMATNbColonnes == MATarg.uiMATNbColonnes && uiMATNbLignes == MATarg.uiMATNbLignes)
 	{
-		char pTexteException[59] = "Impossible d'additionner des matrices de taille différente\n";
+		MType** pTab = new MType*[uiMATNbLignes];
+		unsigned int uiBoucleLigne;
+		unsigned int uiBoucleColonne;
+
+		for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+			pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
+
+		for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		{
+			for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+			{
+				pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] + MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
+			}
+		}
+		CMatrice MATaddition(uiMATNbLignes, uiMATNbColonnes, pTab);
+		return MATaddition;
+	}
+	else
+	{
+		char pTexteException[61] = "Impossible d'additionner des matrices de taille différente\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
-
-	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne;
-	unsigned int uiBoucleColonne;
-
-	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
-
-	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-	{
-		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] + MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
-		}
-	}
-	CMatrice MATaddition(uiMATNbLignes, uiMATNbColonnes, pTab);
-
-	return MATaddition;
 
 }
 
@@ -291,11 +293,11 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice MATarg)
+inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		char pTexteException[29] = "Matrice de taille différentes\n";
+		char pTexteException[32] = "Matrice de taille différentes\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 
@@ -314,6 +316,5 @@ inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice MATarg)
 		}
 	}
 	CMatrice MATsoustraction(uiMATNbLignes, uiMATNbColonnes, pTab);
-
 	return MATsoustraction;
 }

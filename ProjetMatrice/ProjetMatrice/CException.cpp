@@ -4,7 +4,7 @@
 CException::CException()
 {
 	unsigned int uiEXCValeur = 0;
-	string const sEXCDesc = "";
+	string sEXCDesc = "";
 }
 
 CException::CException(CException * EXPobj)

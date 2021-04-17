@@ -5,6 +5,10 @@ using namespace std;
 #ifndef Matrice
 #define Matrice 
 
+#define Mat_Non_Carre 1
+#define Mat_Taille_diff 2
+#define Valeur_Non_Valide 3
+
 template <class MType> class CMatrice
 {
 private:
@@ -82,9 +86,7 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 {
 	if (uiMATNbColonnes != uiMATNbLignes)
 	{
-		CException EXCobj;
-		EXCobj.EXCmodifier_desc("Matrice non caré");
-		throw (EXCobj);
+		throw CException(Mat_Non_Carre,"matrice non carré");
 	}
 	MType** pTab = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
@@ -122,9 +124,7 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
 {
 	if (uiChoixLigne > uiMATNbLignes || uiChoixColonne > uiMATNbColonnes) 
 	{
-		CException EXCobj;
-		EXCobj.EXCmodifier_desc("Choix en dehors de la taille de la matrice");
-		throw (EXCobj);
+		throw CException(Mat_Taille_diff, "Choix en dehors de la taille de la matrice");
 	}
 	pMATTableau[uiChoixLigne-1][uiChoixColonne-1] = valeur;
 }
@@ -154,9 +154,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType rNombre)
 {
 	if (rNombre == 0)
 	{
-		CException EXCobj;
-		EXCobj.EXCmodifier_desc("Division impossible");
-		throw (EXCobj);
+		throw CException(Valeur_Non_Valide, "Division impossible");
 	}
 	MType** pTab = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
@@ -180,9 +178,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
 		//cout << "Impossible d'additionner ces deux matrices." << endl;
-		CException EXCobj;
-		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");
-		throw (EXCobj);
+		throw CException(Mat_Taille_diff, "Impossible d'additionner des matrices de taille différente");
 	}
 	MType** pTab = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
@@ -206,9 +202,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
 	{
-		CException EXCobj;
-		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");  //PAS LA BONNE EXCEPTION A CHANGER
-		throw (EXCobj);
+		throw CException(Mat_Taille_diff, "Nb Colonnes de la première matrice différent du Nb Lignes de la deuxieme matrice");
 	}
 	unsigned int uiDimension = uiMATNbColonnes;
 	
@@ -240,11 +234,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		//cout << "Impossible de soustraire ces deux matrices." << endl;
-		CException EXCobj;
-		EXCobj.EXCmodifier_desc("Matrices de dimensions différentes");
-		throw (EXCobj);
-		
+		throw CException(Mat_Taille_diff, "Matrice de taille différentes");
 	}
 	MType** pTab = new MType*[uiMATNbLignes];
 	for (unsigned int uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)

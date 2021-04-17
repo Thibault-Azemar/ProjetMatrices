@@ -154,7 +154,7 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
  * @return
  */
 template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator*(MType rNombre)
+inline CMatrice<MType> & CMatrice<MType>::operator*(MType Valeur)
 {
 	MType** pTab = new MType*[uiMATNbLignes];
 	unsigned int uiBoucleLigne = 0;
@@ -167,7 +167,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(MType rNombre)
 	{
 		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = rNombre * pMATTableau[uiBoucleLigne][uiBoucleColonne];
+			pTab[uiBoucleLigne][uiBoucleColonne] = Valeur * pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
 	}
 	CMatrice MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
@@ -175,72 +175,6 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(MType rNombre)
 	return MATmultiplication;
 }
 
-/**
- * @brief surcharge opérateur /
- * @param rNombre
- * @return
- */
-template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator/(MType rNombre)
-{
-	if (rNombre == 0)
-	{
-		char texte[20] = "Division impossible\n";
-		throw CException(Valeur_Non_Valide, texte);
-	}
-
-	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
-
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-		pTab[uiBoucleLigne] = new double[uiMATNbColonnes];
-
-	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] / rNombre;
-		}
-	}
-	CMatrice MATdivision(uiMATNbLignes, uiMATNbColonnes, pTab);
-
-	return MATdivision;
-}
-
-/**
- * @brief surcharge opérateur +
- * @param MATarg
- * @return
- */
-template<class MType>
-inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
-{
-	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
-	{
-		char texte[45] = "Impossible d'additionner des matrices de taille différente";
-		throw CException(Mat_Taille_diff, texte);
-	}
-
-	MType** pTab = new MType*[uiMATNbLignes];
-	unsigned int uiBoucleLigne = 0;
-	unsigned int uiBoucleColonne = 0;
-
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
-
-	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
-	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
-		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] + MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
-		}
-	}
-	CMatrice MATaddition(uiMATNbLignes, uiMATNbColonnes, pTab);
-
-	return MATaddition;
-
-}
 
 /**
  * @brief deuxième surcharge opérateur *
@@ -282,6 +216,74 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
 
 	return MATmultiplication;
 }
+
+/**
+ * @brief surcharge opérateur /
+ * @param rNombre
+ * @return
+ */
+template<class MType>
+inline CMatrice<MType> & CMatrice<MType>::operator/(MType Valeur)
+{
+	if (rNombre == 0)
+	{
+		char texte[20] = "Division impossible\n";
+		throw CException(Valeur_Non_Valide, texte);
+	}
+
+	MType** pTab = new MType*[uiMATNbLignes];
+	unsigned int uiBoucleLigne = 0;
+	unsigned int uiBoucleColonne = 0;
+
+	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new double[uiMATNbColonnes];
+
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	{
+		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		{
+			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] / Valeur;
+		}
+	}
+	CMatrice MATdivision(uiMATNbLignes, uiMATNbColonnes, pTab);
+
+	return MATdivision;
+}
+
+/**
+ * @brief surcharge opérateur +
+ * @param MATarg
+ * @return
+ */
+template<class MType>
+inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
+{
+	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
+	{
+		char texte[45] = "Impossible d'additionner des matrices de taille différente";
+		throw CException(Mat_Taille_diff, texte);
+	}
+
+	MType** pTab = new MType*[uiMATNbLignes];
+	unsigned int uiBoucleLigne = 0;
+	unsigned int uiBoucleColonne = 0;
+
+	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
+
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	{
+		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		{
+			pTab[uiBoucleLigne][uiBoucleColonne] = pMATTableau[uiBoucleLigne][uiBoucleColonne] + MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
+		}
+	}
+	CMatrice MATaddition(uiMATNbLignes, uiMATNbColonnes, pTab);
+
+	return MATaddition;
+
+}
+
 
 /**
  * @brief surcharge opérateur -

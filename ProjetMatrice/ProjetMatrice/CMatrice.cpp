@@ -86,7 +86,7 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 {
 	if (uiMATNbColonnes != uiMATNbLignes)
 	{
-		char pTexteException[15] = "Matrice non carré\n";
+		char pTexteException[19] = "Matrice non carré\n";
 		throw CException(Mat_Non_Carre, pTexteException);
 	}
 
@@ -142,7 +142,7 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
 {
 	if (uiChoixLigne > uiMATNbLignes || uiChoixColonne > uiMATNbColonnes)
 	{
-		char pTexteException[30] = "Choix en dehors de la taille de la matrice\n";
+		char pTexteException[37] = "Choix en dehors de la taille de la matrice\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 	pMATTableau[uiChoixLigne - 1][uiChoixColonne - 1] = valeur;
@@ -186,7 +186,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator*(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
 	{
-		char pTexteException[100] = "Nb Colonnes de la 1ère matrice différent du Nb Lignes de la 2eme matrice\n";
+		char pTexteException[74] = "Nb Colonnes de la 1ère matrice différent du Nb Lignes de la 2eme matrice\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 	unsigned int uiDimension = uiMATNbColonnes;
@@ -227,7 +227,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator/(MType valeur)
 {
 	if (valeur == 0)
 	{
-		char pTexteException[20] = "Division impossible\n";
+		char pTexteException[21] = "Division impossible\n";
 		throw CException(Valeur_Non_Valide, pTexteException);
 	}
 
@@ -260,7 +260,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator+(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		char pTexteException[45] = "Impossible d'additionner des matrices de taille différente";
+		char pTexteException[59] = "Impossible d'additionner des matrices de taille différente\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 
@@ -295,7 +295,7 @@ inline CMatrice<MType> & CMatrice<MType>::operator-(CMatrice MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		char pTexteException[30] = "Matrice de taille différentes\n";
+		char pTexteException[29] = "Matrice de taille différentes\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 

@@ -44,4 +44,15 @@ int main()
 	}
 	MAT3.MATAfficherMatrice(nomMatrice3);
 
+	CMatrice<double> MAT4;
+	try
+	{
+		MAT4 = MAT2 / 5;
+	}
+	catch (CException EXCLevee)
+	{
+		cout << EXCLevee.EXCAvoirDesc();
+	}
+	MAT4.MATAfficherMatrice(nomMatrice3);
+
 }

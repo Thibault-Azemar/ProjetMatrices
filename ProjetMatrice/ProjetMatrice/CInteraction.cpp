@@ -16,7 +16,7 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 
 	if (!fichier) // si l'ouverture n'a pas fonctionné
 	{
-		char pTexteException[39] = "Impossible d'ouvrir le fichier\n";
+		char pTexteException[32] = "Impossible d'ouvrir le fichier\n";
 		throw CException(Fichier_Err, pTexteException);
 	}
 
@@ -39,7 +39,7 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 	if (!STRTest.STRChainesEgales(pINTTypeMatriceCorrecte, pLigneFichierExtraite))
 	{
 		// alors le tableau n'est pas de type double
-		char pTexteException[39] = "Choix en dehors du type de la matrice\n";
+		char pTexteException[27] = "le type doit etre double.\n";
 		throw CException(Mat_Mauvais_Type, pTexteException);
 	}
 
@@ -158,7 +158,7 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 			if (uiColonne == uiINTNbColonnes)
 			{
 				//cout << "Veuillez ne pas mettre d'espace avant ou après chaque nombre, seules les tabulations sont autorisées." << endl;
-				char pTexteException[50] = "Veuillez ne pas mettre d'espace en fin de ligne\n";
+				char pTexteException[49] = "Veuillez ne pas mettre d'espace en fin de ligne\n";
 				throw CException(Syntaxe_Incorrecte, pTexteException);
 			}
 		}

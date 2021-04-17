@@ -163,7 +163,7 @@ inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned 
   * \return le résultat de la matrice multipliée par la valeur
   */
 template<class MType>
-inline CMatrice<MType> CMatrice<MType>::operator*(MType valeur)
+inline CMatrice<MType> CMatrice<MType>::operator*(const double valeur)
 {
 	MType** pTab = new MType*[uiMATNbLignes];
 	unsigned int uiBoucleLigne;
@@ -232,7 +232,7 @@ inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice MATarg)
   * \return le résultat de la matrice divisé par le nombre
   */
 template<class MType>
-inline CMatrice<MType> CMatrice<MType>::operator/(MType valeur)
+inline CMatrice<MType> CMatrice<MType>::operator/(const double valeur)
 {
 	if (valeur == 0)
 	{
@@ -326,4 +326,17 @@ inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice MATarg)
 
 	CMatrice MATsoustraction(uiMATNbLignes, uiMATNbColonnes, pTab);
 	return MATsoustraction;
+}
+
+/**
+  * \fn CMatrice<MType> operator*(const double Valeur, CMatrice<MType> MATarg)
+  * \brief commutateur de l'opérateur*
+  * \param[in] Valeur : la constante
+  * \param[in] MATarg : la matrice pour laquelle on veut multiplier la constante
+  * \return inversion des valeurs (commutation)
+  */
+template<class MType>
+CMatrice<MType> operator*(const double Valeur, CMatrice<MType> MATarg)
+{
+	return MATarg * Valeur;
 }

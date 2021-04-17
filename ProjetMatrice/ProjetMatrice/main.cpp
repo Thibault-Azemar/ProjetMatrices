@@ -64,7 +64,7 @@ int main()
 	CMatrice<double> MAT5;
 	try
 	{
-		MAT5 = MAT1 * 5;
+		MAT5 =5 * MAT1;
 		MAT5.MATAfficherMatrice(nomMatrice5);
 	}
 	catch (CException EXCLevee)

@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include "CException.h"
-using namespace std;
 
 #ifndef Matrice
 #define Matrice 

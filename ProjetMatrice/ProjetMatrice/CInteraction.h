@@ -1,10 +1,6 @@
-#include <iostream>
-#include <fstream>
 #include "CString.h"
 #include "CMatrice.h"
-#include "CException.h"
 
-using namespace std;
 
 class CInteraction
 {
@@ -21,11 +17,7 @@ private:
 	char pINTMatriceCorrecte[12] = "Matrice=[";
 public:
 	CInteraction();
-	CInteraction(char *pNomFichier);
 	CMatrice<double> INTGetMatrice(char *pNomFichier);
-	int INTGetNbLignes();
-	int INTGetNbColonnes();
-	double **INTGetTab();
 };
 
 

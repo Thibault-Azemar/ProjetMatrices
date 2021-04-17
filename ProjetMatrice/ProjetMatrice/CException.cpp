@@ -13,7 +13,7 @@ CException::CException(CException * EXPobj)
 	sEXCDesc = EXPobj->sEXCDesc;
 }
 
-CException::CException(unsigned int uiValeur, string sDesc)
+CException::CException(unsigned int uiValeur, char* sDesc)
 {
 	uiEXCValeur = uiValeur;
 	sEXCDesc = sDesc;
@@ -23,7 +23,7 @@ CException::~CException()
 {
 }
 
-void CException::EXCmodifier_desc(string sDesc)
+void CException::EXCmodifier_desc(char* sDesc)
 {
 	sEXCDesc = sDesc;
 }
@@ -39,7 +39,7 @@ unsigned int CException::EXCavoir_valeur()
 	return uiEXCValeur;
 }
 
-string CException::EXCavoir_desc()
+char* CException::EXCavoir_desc()
 {
 	return this->sEXCDesc;
 }

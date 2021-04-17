@@ -1,6 +1,8 @@
-#pragma once
 #include <iostream>
+#include <fstream>
+#include <stdio.h>
 using namespace std;
+
 
 class CException 
 {

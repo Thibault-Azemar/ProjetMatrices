@@ -1,15 +1,8 @@
-// ProjetMatrices.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-
-#include <iostream>
-#include <string>
-#include "CMatrice.h"
 #include "CInteraction.h"
 
 
-
 int main()
-{
-	
+{	
 	char fichier[14] = "matrice.txt";
 	char nomMatrice1[5] = "MAT1";
 	CMatrice<double> MAT1;

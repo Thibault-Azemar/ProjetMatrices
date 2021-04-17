@@ -1,6 +1,4 @@
 #include "CString.h"
-#include <iostream>
-using namespace std;
 
 
 bool CString::STRChainesEgales(char *pChaineArg1, char *pChaineArg2)

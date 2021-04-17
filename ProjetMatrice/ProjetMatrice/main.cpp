@@ -1,15 +1,19 @@
 #include "CInteraction.h"
 
 
+/**
+  * \fn int main()
+  * \brief fonction principale testant la librairie
+  */
 int main()
 {	
-	char fichier[14] = "matrice.txt";
+	char fichier1[14] = "matrice.txt";
 	char nomMatrice1[5] = "MAT1";
 	CMatrice<double> MAT1;
 	try 
 	{
 		CInteraction Objet1;
-		MAT1 = Objet1.INTGetMatrice(fichier);
+		MAT1 = Objet1.INTGetMatrice(fichier1);
 	}
 	catch (CException EXCLevee)
 	{
@@ -46,7 +50,6 @@ int main()
 
 	char nomMatrice4[5] = "MAT4";
 	CMatrice<double> MAT4;
-	
 	try
 	{
 		MAT4 = MAT1 + MAT3 - MAT1 + MAT2 - MAT1;
@@ -57,4 +60,15 @@ int main()
 		cout << EXCLevee.EXCAvoirDesc();
 	}
 
+	char nomMatrice5[5] = "MAT5";
+	CMatrice<double> MAT5;
+	try
+	{
+		MAT5 = MAT1 * 5;
+		MAT5.MATAfficherMatrice(nomMatrice5);
+	}
+	catch (CException EXCLevee)
+	{
+		cout << EXCLevee.EXCAvoirDesc();
+	}
 }

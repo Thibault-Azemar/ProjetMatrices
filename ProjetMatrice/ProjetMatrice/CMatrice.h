@@ -16,7 +16,7 @@ private:
 
 public:
 	CMatrice<MType>();																			//constructeur par défaut
-	CMatrice<MType>(CMatrice *MATarg);					   //ok mais exeption a gerer			//constructeur de recopie
+	CMatrice<MType>(CMatrice *MATarg);															//constructeur de recopie
 	CMatrice<MType>(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pMATTableau);	//constructeur avec paramètres
 	~CMatrice<MType>();																			//destructeur
 
@@ -24,9 +24,9 @@ public:
 	void MATAfficherMatrice(char *pNomMatrice);													//affichage de la matrice
 	void MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur);  //changement d'une valeur
 	CMatrice operator*(MType valeur);															//multiplication par une constante
-	//CMatrice operator*(MType valeur, CMatrice MATarg);                                                   //commutativité de la multiplication par une constante
+	//CMatrice operator*(MType valeur, CMatrice MATarg);                                        //commutativité de la multiplication par une constante
 	CMatrice operator*(CMatrice MATarg);														//multiplication de deux matrices
-	CMatrice operator/(MType valeur);                    									//division par une constante
+	CMatrice operator/(MType valeur);															//division par une constante
 	CMatrice operator+(CMatrice MATarg);														//addition de deux matrices
 	CMatrice operator-(CMatrice MATarg);														//soustraction de deux matrices
 };

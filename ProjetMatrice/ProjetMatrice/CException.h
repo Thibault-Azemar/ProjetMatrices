@@ -14,6 +14,7 @@ public:
 	CException(CException* EXPobj);
 	CException(unsigned int uiValeur, char* pDesc);
 	~CException();
+
 	void EXCModifierDesc(char* pDesc);
 	void EXCModifierValeur(unsigned int uiValeur);
 	unsigned int EXCAvoirValeur();

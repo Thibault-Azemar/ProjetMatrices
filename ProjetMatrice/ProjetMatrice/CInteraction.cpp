@@ -4,12 +4,24 @@
 #define Syntaxe_Incorrecte 5
 #define Fichier_Err 6
 
+
+/**
+  * \fn CInteraction::CInteraction()
+  * \brief constructeur par défaut
+  */
 CInteraction::CInteraction()
 {
-
+	uiINTNbColonnes = 1;
+	uiINTNbLignes = 1;
+	pINTTab = nullptr;
 }
 
-
+/**
+  * \fn CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
+  * \brief permet de récupérer une matrice depuis un fichier texte
+  * \param[in] pNomFichier : le nom du fichier texte
+  * \return la matrice récupérée depuis le fichier texte
+  */
 CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 {
 	ifstream fichier(pNomFichier, ios::in);  // on ouvre en lecture

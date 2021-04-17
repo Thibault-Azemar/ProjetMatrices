@@ -12,7 +12,7 @@ int main()
 	}
 	catch (CException EXCLevee)
 	{
-		cout << EXCLevee.EXCavoir_desc();
+		cout << EXCLevee.EXCAvoirDesc();
 	}
 	
 	MAT1.MATAfficherMatrice(nomMatrice1);
@@ -36,7 +36,7 @@ int main()
 	}
 	catch (CException EXCLevee)
 	{
-		cout << EXCLevee.EXCavoir_desc();
+		cout << EXCLevee.EXCAvoirDesc();
 	}
 	
 	char nomMatrice2[5] = "MAT2";

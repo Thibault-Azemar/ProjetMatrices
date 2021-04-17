@@ -4,7 +4,7 @@
 CException::CException()
 {
 	unsigned int uiEXCValeur = 0;
-	char *sEXCDesc;
+	char *pEXCDesc;
 }
 
 CException::CException(CException * EXPobj)
@@ -32,7 +32,6 @@ void CException::EXCModifierValeur(unsigned int uiValeur)
 {
 	uiEXCValeur = uiValeur;
 }
-
 
 unsigned int CException::EXCAvoirValeur()
 {

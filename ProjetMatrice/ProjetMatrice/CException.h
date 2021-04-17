@@ -7,8 +7,8 @@ using namespace std;
 class CException 
 {
 private:
-	unsigned int uiEXCValeur; //numéro de l'erreur
-	char* pEXCDesc; //Description de l'erreur
+	unsigned int uiEXCValeur; // Numéro de l'erreur
+	char* pEXCDesc;           // Description de l'erreur
 public:
 	CException();
 	CException(CException* EXPobj);

@@ -14,7 +14,7 @@ int main()
 	try
 	{
 
-		MAT1 = (Objet1.INTGetMatrice(fichier1));
+		MAT1 = CMatrice<double>(Objet1.INTGetMatrice(fichier1));
 		
 	}
 	catch (CException EXCLevee)

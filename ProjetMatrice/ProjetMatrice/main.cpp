@@ -6,7 +6,7 @@
   * \brief fonction principale testant la librairie
   */
 int main()
-{	
+{
 	char fichier1[14] = "matrice.txt";
 	char nomMatrice1[5] = "MAT1";
 	CMatrice<double> MAT1;
@@ -14,22 +14,22 @@ int main()
 	try
 	{
 
-		MAT1 = CMatrice<double>(Objet1.INTGetMatrice(fichier1));
-		
+		MAT1 = (Objet1.INTGetMatrice(fichier1));
+
 	}
 	catch (CException EXCLevee)
 	{
 		cout << EXCLevee.EXCAvoirDesc();
 	}
 	MAT1.MATAfficherMatrice(nomMatrice1);
-	
+
 
 	char fichier2[15] = "matrice2.txt";
 	char nomMatrice2[5] = "MAT2";
 	CMatrice<double> MAT2;
 	CInteraction Objet2;
 	try {
-		
+
 		MAT2 = Objet2.INTGetMatrice(fichier2);
 	}
 	catch (CException EXCLevee)
@@ -62,18 +62,18 @@ int main()
 	{
 		cout << EXCLevee.EXCAvoirDesc();
 	}
-	
+
 
 	char nomMatrice5[5] = "MAT5";
 	CMatrice<double> MAT5;
 	try
 	{
-		MAT5 =5 * MAT1;
+		MAT5 = 5 * MAT1;
 		MAT5.MATAfficherMatrice(nomMatrice5);
 	}
 	catch (CException EXCLevee)
 	{
 		cout << EXCLevee.EXCAvoirDesc();
 	}
-	
+
 }

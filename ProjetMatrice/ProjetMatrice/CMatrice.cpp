@@ -11,7 +11,7 @@ inline CMatrice<MType>::CMatrice()
 }
 
 /**
-  * \fn inline CMatrice<MType>::CMatrice(CMatrice *MATarg)
+  * \fn inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
   * \brief constructeur de recopie
   * \param[in] MATarg : la matrice à recopier
   */
@@ -137,27 +137,47 @@ inline void CMatrice<MType>::MATAfficherMatrice(char *pNomMatrice)
 	cout << " ]\n" << endl;
 }
 
+
+/**
+  * \fn inline MType CMatrice<MType>::MATAvoirValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne)
+  * \brief accesseur
+  * \param[in] uiChoixLigne : le choix de la ligne 
+  * \param[in] uiChoixColonne : le choix de la colonne
+  * \return la valeur du tableau à la ligne uiChoixLigne et la colonne uiChoixColonne
+  */
 template<class MType>
-MType CMatrice<MType>::MATAvoirValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne)
+inline MType CMatrice<MType>::MATAvoirValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne)
 {
 	return pMATTableau[uiChoixLigne][uiChoixColonne];
 }
 
+
+/**
+  * \fn inline unsigned int CMatrice<MType>::MATGetNbLignes()
+  * \brief accesseur de la classe
+  * \return le nombre de lignes de la matrice
+  */
 template<class MType>
-unsigned int CMatrice<MType>::MATGetNbLignes()
+inline unsigned int CMatrice<MType>::MATGetNbLignes()
 {
 	return uiMATNbLignes;
 }
 
+
+/**
+  * \fn inline unsigned int CMatrice<MType>::MATGetNbColonnes()
+  * \brief accesseur de la classe
+  * \return le nombre de colonnes de la matrice
+  */
 template<class MType>
-unsigned int CMatrice<MType>::MATGetNbColonnes()
+inline unsigned int CMatrice<MType>::MATGetNbColonnes()
 {
 	return uiMATNbColonnes;
 }
 
 
 /**
-  * \fn inline CMatrice<MType> CMatrice<MType>::operator*(MType valeur)
+  * \fn inline CMatrice<MType> CMatrice<MType>::operator*(const double valeur)
   * \brief surcharge opérateur * pour multiplier une matrice par un nombre
   * \param[in] valeur : la valeur pour laquelle on veut multiplier la matrice
   * \return le résultat de la matrice multipliée par la valeur
@@ -185,7 +205,7 @@ inline CMatrice<MType> CMatrice<MType>::operator*(const double valeur)
 }
 
 /**
-  * \fn inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice MATarg)
+  * \fn inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice &MATarg)
   * \brief surcharge opérateur * pour multiplier deux matrices
   * \param[in] MATarg : la matrice pour laquelle on veut multiplier la matrice
   * \return la multiplication des deux matrices
@@ -226,7 +246,7 @@ inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice &MATarg)
 }
 
 /**
-  * \fn inline CMatrice<MType> CMatrice<MType>::operator/(MType valeur)
+  * \fn inline CMatrice<MType> CMatrice<MType>::operator/(const double valeur)
   * \brief surcharge opérateur / pour diviser une matrice par un nombre
   * \param[in] valeur : la valeur pour laquelle on veut diviser la matrice
   * \return le résultat de la matrice divisé par le nombre
@@ -259,7 +279,7 @@ inline CMatrice<MType> CMatrice<MType>::operator/(const double valeur)
 }
 
 /**
-  * \fn inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice MATarg)
+  * \fn inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice &MATarg)
   * \brief surcharge opérateur + pour additioner deux matrices
   * \param[in] MATarg : la matrice pour laquelle on veut additionner la première matrice
   * \return l'addition des deux matrices
@@ -295,7 +315,7 @@ inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice &MATarg)
 }
 
 /**
-  * \fn inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice MATarg)
+  * \fn inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice &MATarg)
   * \brief surcharge opérateur - pour soustraire deux matrices
   * \param[in] MATarg : la matrice pour laquelle on veut soustraire la première matrice
   * \return la soustraction des deux matrices
@@ -328,6 +348,13 @@ inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice &MATarg)
 	return MATsoustraction;
 }
 
+
+/**
+  * \fn CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
+  * \brief surcharge de l'opérateur =
+  * \param[in] MATarg : la matrice pour laquelle on veut appliquer l'opérateur =
+  * \return opérateur d'auto-référencement
+  */
 template<class MType>
 inline CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
 {
@@ -354,14 +381,14 @@ inline CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
 
 
 /**
-  * \fn CMatrice<MType> operator*(const double Valeur, CMatrice<MType> MATarg)
+  * \fn inline CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
   * \brief commutateur de l'opérateur*
   * \param[in] Valeur : la constante
   * \param[in] MATarg : la matrice pour laquelle on veut multiplier la constante
   * \return inversion des valeurs (commutation)
   */
 template<class MType>
-CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
+inline CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
 {
 	
 	unsigned int uiMATNbLignes = MATarg.MATGetNbLignes();

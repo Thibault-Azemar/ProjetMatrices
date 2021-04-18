@@ -1,6 +1,6 @@
 /**
   * \fn inline CMatrice<MType>::CMatrice()
-  * \brief constructeur par défaut
+  * \brief constructeur par dÃ©faut
   */
 template<class MType>
 inline CMatrice<MType>::CMatrice()
@@ -13,7 +13,7 @@ inline CMatrice<MType>::CMatrice()
 /**
   * \fn inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
   * \brief constructeur de recopie
-  * \param[in] MATarg : la matrice à recopier
+  * \param[in] MATarg : la matrice Ã  recopier
   */
 template<class MType>
 inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
@@ -24,7 +24,7 @@ inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
 	unsigned int uiBoucleLigne = 0;
 	unsigned int uiBoucleColonne = 0;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pMATTableau[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
@@ -38,10 +38,10 @@ inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
 
 /**
   * \fn inline CMatrice<MType>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pTab)
-  * \brief constructeur avec paramètres
+  * \brief constructeur avec paramÃ¨tres
   * \param[in] uiNbLignes : le nombre de lignes
   * \param[in] uiNbColonnes : le nombre de colonnes
-  * \param[in] pTab : le tableau de 2D contenant les éléments de la matrice
+  * \param[in] pTab : le tableau de 2D contenant les Ã©lÃ©ments de la matrice
   */
 template<class MType>
 inline CMatrice<MType>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColonnes, MType** pTab)
@@ -82,15 +82,15 @@ inline CMatrice<MType>::~CMatrice()
 
 /**
   * \fn inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
-  * \brief calcul la transposé de la matrice
-  * \return la transposé de la matrice
+  * \brief calcul la transposÃ© de la matrice
+  * \return la transposÃ© de la matrice
   */
 template<class MType>
 inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 {
 	if (uiMATNbColonnes != uiMATNbLignes)
 	{
-		char pTexteException[19] = "Matrice non carré\n";
+		char pTexteException[19] = "Matrice non carrÃ©\n";
 		throw CException(Mat_Non_Carre, pTexteException);
 	}
 
@@ -115,9 +115,9 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
 
 /**
   * \fn inline void CMatrice<MType>::MATAfficherMatrice(char *pNomMatrice)
-  * \brief permet de définir le nom de la matrice pour l'affichage
+  * \brief permet de dÃ©finir le nom de la matrice pour l'affichage
   * \param[in] pNomMatrice : le nom de la matrice
-  * \return néant
+  * \return nÃ©ant
   */
 template<class MType>
 inline void CMatrice<MType>::MATAfficherMatrice()
@@ -143,11 +143,16 @@ inline void CMatrice<MType>::MATAfficherMatrice()
   * \brief accesseur
   * \param[in] uiChoixLigne : le choix de la ligne 
   * \param[in] uiChoixColonne : le choix de la colonne
-  * \return la valeur du tableau à la ligne uiChoixLigne et la colonne uiChoixColonne
+  * \return la valeur du tableau Ã  la ligne uiChoixLigne et la colonne uiChoixColonne
   */
 template<class MType>
 inline MType CMatrice<MType>::MATAvoirValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne)
 {
+    if(uiChoixColonne > uiMATNbColonnes || uiChoixLigne > uiMATNbLignes)
+    {
+        char pTexteException[90] = "Nb Colonnes ou nb Lignes en dehors de la matrice \n";
+		throw CException(Mat_Taille_diff, pTexteException);
+    }
 	return pMATTableau[uiChoixLigne][uiChoixColonne];
 }
 
@@ -178,9 +183,9 @@ inline unsigned int CMatrice<MType>::MATGetNbColonnes()
 
 /**
   * \fn inline CMatrice<MType> CMatrice<MType>::operator*(const double valeur)
-  * \brief surcharge opérateur * pour multiplier une matrice par un nombre
+  * \brief surcharge opÃ©rateur * pour multiplier une matrice par un nombre
   * \param[in] valeur : la valeur pour laquelle on veut multiplier la matrice
-  * \return le résultat de la matrice multipliée par la valeur
+  * \return le rÃ©sultat de la matrice multipliÃ©e par la valeur
   */
 template<class MType>
 inline CMatrice<MType> CMatrice<MType>::operator*(const double valeur)
@@ -206,7 +211,7 @@ inline CMatrice<MType> CMatrice<MType>::operator*(const double valeur)
 
 /**
   * \fn inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice &MATarg)
-  * \brief surcharge opérateur * pour multiplier deux matrices
+  * \brief surcharge opÃ©rateur * pour multiplier deux matrices
   * \param[in] MATarg : la matrice pour laquelle on veut multiplier la matrice
   * \return la multiplication des deux matrices
   */
@@ -215,7 +220,7 @@ inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice &MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
 	{
-		char pTexteException[74] = "Nb Colonnes de la 1ère matrice différent du Nb Lignes de la 2eme matrice\n";
+		char pTexteException[90] = "Nb Colonnes de la 1Ã¨re matrice diffÃ©rent du Nb Lignes de la 2eme matrice\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 	unsigned int uiDimension = uiMATNbColonnes;
@@ -247,9 +252,9 @@ inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice &MATarg)
 
 /**
   * \fn inline CMatrice<MType> CMatrice<MType>::operator/(const double valeur)
-  * \brief surcharge opérateur / pour diviser une matrice par un nombre
+  * \brief surcharge opÃ©rateur / pour diviser une matrice par un nombre
   * \param[in] valeur : la valeur pour laquelle on veut diviser la matrice
-  * \return le résultat de la matrice divisé par le nombre
+  * \return le rÃ©sultat de la matrice divisÃ© par le nombre
   */
 template<class MType>
 inline CMatrice<MType> CMatrice<MType>::operator/(const double valeur)
@@ -280,8 +285,8 @@ inline CMatrice<MType> CMatrice<MType>::operator/(const double valeur)
 
 /**
   * \fn inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice &MATarg)
-  * \brief surcharge opérateur + pour additioner deux matrices
-  * \param[in] MATarg : la matrice pour laquelle on veut additionner la première matrice
+  * \brief surcharge opÃ©rateur + pour additioner deux matrices
+  * \param[in] MATarg : la matrice pour laquelle on veut additionner la premiÃ¨re matrice
   * \return l'addition des deux matrices
   */
 template<class MType>
@@ -308,7 +313,7 @@ inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice &MATarg)
 	}
 	else
 	{
-		char pTexteException[61] = "Impossible d'additionner des matrices de taille différente\n";
+		char pTexteException[61] = "Impossible d'additionner des matrices de taille diffÃ©rente\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 
@@ -316,8 +321,8 @@ inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice &MATarg)
 
 /**
   * \fn inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice &MATarg)
-  * \brief surcharge opérateur - pour soustraire deux matrices
-  * \param[in] MATarg : la matrice pour laquelle on veut soustraire la première matrice
+  * \brief surcharge opÃ©rateur - pour soustraire deux matrices
+  * \param[in] MATarg : la matrice pour laquelle on veut soustraire la premiÃ¨re matrice
   * \return la soustraction des deux matrices
   */
 template<class MType>
@@ -325,7 +330,7 @@ inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice &MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
-		char pTexteException[32] = "Matrice de taille différentes\n";
+		char pTexteException[32] = "Matrice de taille diffÃ©rentes\n";
 		throw CException(Mat_Taille_diff, pTexteException);
 	}
 
@@ -351,9 +356,9 @@ inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice &MATarg)
 
 /**
   * \fn CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
-  * \brief surcharge de l'opérateur =
-  * \param[in] MATarg : la matrice pour laquelle on veut appliquer l'opérateur =
-  * \return opérateur d'auto-référencement
+  * \brief surcharge de l'opÃ©rateur =
+  * \param[in] MATarg : la matrice pour laquelle on veut appliquer l'opÃ©rateur =
+  * \return opÃ©rateur d'auto-rÃ©fÃ©rencement
   */
 template<class MType>
 inline CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
@@ -365,7 +370,7 @@ inline CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
 	unsigned int uiBoucleLigne = 0;
 	unsigned int uiBoucleColonne = 0;
 
-	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pMATTableau[uiBoucleLigne] = new MType[uiMATNbColonnes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
@@ -382,7 +387,7 @@ inline CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
 
 /**
   * \fn inline CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
-  * \brief commutateur de l'opérateur*
+  * \brief commutateur de l'opÃ©rateur*
   * \param[in] Valeur : la constante
   * \param[in] MATarg : la matrice pour laquelle on veut multiplier la constante
   * \return inversion des valeurs (commutation)
@@ -410,6 +415,7 @@ inline CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
 	}
 
 	CMatrice<MType> MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
+
 	
 	return MATmultiplication;
 }

@@ -21,7 +21,7 @@ public:
 	~CMatrice<MType>();																			//destructeur
 
 	CMatrice<MType> MATCalculerTranspose();													    //calcule la transposée
-	void MATAfficherMatrice(char *pNomMatrice);                                                 //affichage de la matrice
+	void MATAfficherMatrice();                                                 //affichage de la matrice
 	//Accesseurs
 	MType MATAvoirValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne);               //retourne une valeur dans un tableau
 	unsigned int MATGetNbLignes();                                                              //retourne le nombre de lignes de la matrice

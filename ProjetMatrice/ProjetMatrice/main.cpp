@@ -5,75 +5,127 @@
   * \fn int main()
   * \brief fonction principale testant la librairie
   */
-int main()
+int main(int argc, char* argv[])
 {
-	char fichier1[14] = "matrice.txt";
-	char nomMatrice1[5] = "MAT1";
-	CMatrice<double> MAT1;
-	CInteraction Objet1;
-	try
+	const int NbMatrices = argc - 1;
+
+	if (NbMatrices > 0)
 	{
+		CMatrice<double> *TableauMatrices = new CMatrice<double>[NbMatrices];
+		int NbBoucle;
+		CMatrice<double> MAT;
 
-		MAT1 = (Objet1.INTGetMatrice(fichier1));
+		try
+		{
+			for (NbBoucle = 0; NbBoucle < NbMatrices; NbBoucle++)
+			{
+				CInteraction Objet1;
+				TableauMatrices[NbBoucle] = Objet1.INTGetMatrice(argv[NbBoucle + 1]);
+			}
+		}
+		catch (CException EXCLevee)
+		{
+			cout << EXCLevee.EXCAvoirDesc();
+		}
 
+		cout << "Rentrez une valeur c." << endl;
+		double c;
+		cin >> c;
+
+		cout << "Resultat de la multiplication de chaque matrice par " << c << " :" << endl;
+		try
+		{
+			for (NbBoucle = 0; NbBoucle < NbMatrices; NbBoucle++)
+			{
+				MAT = c * TableauMatrices[NbBoucle];
+				MAT.MATAfficherMatrice();
+				cout << endl;
+			}
+		}
+		catch (CException EXCLevee)
+		{
+			cout << EXCLevee.EXCAvoirDesc();
+		}
+
+		cout << "Resultat de la division de chaque matrice par " << c << " :" << endl;
+		try
+		{
+			for (NbBoucle = 0; NbBoucle < NbMatrices; NbBoucle++)
+			{
+				MAT = TableauMatrices[NbBoucle] / c;
+				MAT.MATAfficherMatrice();
+				cout << endl;
+			}
+		}
+		catch (CException EXCLevee)
+		{
+			cout << EXCLevee.EXCAvoirDesc();
+		}
+		if (NbMatrices > 1)
+		{
+			cout << "Resultat de l'addition de chaques matrices :" << endl;
+			try
+			{
+				CMatrice<double> MAT = TableauMatrices[0];
+				for (NbBoucle = 1; NbBoucle < NbMatrices; NbBoucle++)
+				{
+					MAT = MAT + TableauMatrices[NbBoucle];
+				}
+				MAT.MATAfficherMatrice();
+				cout << endl;
+			}
+			catch (CException EXCLevee)
+			{
+				cout << EXCLevee.EXCAvoirDesc();
+			}
+
+			cout << "Resultat de l'operation M1 - M2 + M3 ... :" << endl;
+			try
+			{
+				CMatrice<double> MAT = TableauMatrices[0];
+				for (NbBoucle = 1; NbBoucle < NbMatrices; NbBoucle++)
+				{
+					if (NbBoucle % 2 == 0)
+					{
+						MAT = MAT + TableauMatrices[NbBoucle];
+					}
+					else
+					{
+						MAT = MAT - TableauMatrices[NbBoucle];
+					}
+				}
+				MAT.MATAfficherMatrice();
+				cout << endl;
+			}
+			catch (CException EXCLevee)
+			{
+				cout << EXCLevee.EXCAvoirDesc();
+			}
+
+			cout << "Resultat de la multiplication de chaques matrices :" << endl;
+			try
+			{
+				CMatrice<double> MAT = TableauMatrices[0];
+				for (NbBoucle = 1; NbBoucle < NbMatrices; NbBoucle++)
+				{
+					MAT = MAT * TableauMatrices[NbBoucle];
+				}
+				MAT.MATAfficherMatrice();
+				cout << endl;
+			}
+			catch (CException EXCLevee)
+			{
+				cout << EXCLevee.EXCAvoirDesc();
+			}
+		}
+		else
+		{
+			cout << "Saissisez plusieurs fichiers pour faire les operations entre plusieurs matrices." << endl;
+
+		}
+		delete[] TableauMatrices;
+		return 0;
 	}
-	catch (CException EXCLevee)
-	{
-		cout << EXCLevee.EXCAvoirDesc();
-	}
-	MAT1.MATAfficherMatrice(nomMatrice1);
-
-
-	char fichier2[15] = "matrice2.txt";
-	char nomMatrice2[5] = "MAT2";
-	CMatrice<double> MAT2;
-	CInteraction Objet2;
-	try {
-
-		MAT2 = Objet2.INTGetMatrice(fichier2);
-	}
-	catch (CException EXCLevee)
-	{
-		cout << EXCLevee.EXCAvoirDesc();
-	}
-	MAT2.MATAfficherMatrice(nomMatrice2);
-
-
-	char nomMatrice3[5] = "MAT3";
-	CMatrice<double> MAT3;
-	try
-	{
-		MAT3 = MAT1 * MAT2;
-	}
-	catch (CException EXCLevee)
-	{
-		cout << EXCLevee.EXCAvoirDesc();
-	}
-	MAT3.MATAfficherMatrice(nomMatrice3);
-
-	char nomMatrice4[5] = "MAT4";
-	CMatrice<double> MAT4;
-	try
-	{
-		MAT4 = MAT1 + MAT3 - MAT1 + MAT2 - MAT1;
-		MAT4.MATAfficherMatrice(nomMatrice4);
-	}
-	catch (CException EXCLevee)
-	{
-		cout << EXCLevee.EXCAvoirDesc();
-	}
-
-
-	char nomMatrice5[5] = "MAT5";
-	CMatrice<double> MAT5;
-	try
-	{
-		MAT5 = 5 * MAT1;
-		MAT5.MATAfficherMatrice(nomMatrice5);
-	}
-	catch (CException EXCLevee)
-	{
-		cout << EXCLevee.EXCAvoirDesc();
-	}
-
+	cout << "Veuillez saisir le nom de fichier" << endl;
+	return 1;
 }

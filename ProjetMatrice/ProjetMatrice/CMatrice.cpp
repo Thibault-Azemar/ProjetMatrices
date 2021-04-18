@@ -120,12 +120,12 @@ inline CMatrice<MType> CMatrice<MType>::MATCalculerTranspose()
   * \return néant
   */
 template<class MType>
-inline void CMatrice<MType>::MATAfficherMatrice(char *pNomMatrice)
+inline void CMatrice<MType>::MATAfficherMatrice()
 {
 	unsigned int uiBoucleLigne;
 	unsigned int uiBoucleColonne;
 
-	cout << pNomMatrice << " = [\n";
+	cout << "MAT = [\n";
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
 		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)

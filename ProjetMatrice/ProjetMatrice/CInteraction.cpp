@@ -28,7 +28,7 @@ CMatrice<double> CInteraction::INTGetMatrice(char * pNomFichier)
 
 	if (!fichier) // si l'ouverture n'a pas fonctionné
 	{
-		char pTexteException[32] = "Impossible d'ouvrir le fichier\n";
+		char pTexteException[32] = "Impossible d'ouvrir un fichier\n";
 		throw CException(Fichier_Err, pTexteException);
 	}
 

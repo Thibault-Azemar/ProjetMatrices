@@ -1,40 +1,6 @@
-﻿  main.cpp
-c:\users\thiba\desktop\projet\fichiers\cmatrice.h(64): error C3861: 'pTab' : identificateur introuvable
-c:\users\thiba\desktop\projet\fichiers\cmatrice.h(76): error C2244: 'CMatrice<MType>::MATCalculerTranspose' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(75): note: voir la déclaration de 'CMatrice<MType>::MATCalculerTranspose'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(76): note: définition
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(76): note: 'CMatrice CMatrice<MType>::MATCalculerTranspose(void)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(76): note: déclarations existantes
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(76): note: 'CMatrice<MType> CMatrice<MType>::MATCalculerTranspose(void)'
-c:\users\thiba\desktop\projet\fichiers\cmatrice.h(109): error C2244: 'CMatrice<MType>::operator *' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(108): note: voir la déclaration de 'CMatrice<MType>::operator *'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(109): note: définition
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(109): note: 'CMatrice CMatrice<MType>::operator *(MType *)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(109): note: déclarations existantes
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(109): note: 'CMatrice<MType> CMatrice<MType>::operator *(CMatrice<MType>)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(109): note: 'CMatrice<MType> CMatrice<MType>::operator *(MType)'
-c:\users\thiba\desktop\projet\fichiers\cmatrice.h(127): error C2244: 'CMatrice<MType>::operator /' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(126): note: voir la déclaration de 'CMatrice<MType>::operator /'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(127): note: définition
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(127): note: 'CMatrice CMatrice<MType>::operator /(MType *)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(127): note: déclarations existantes
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(127): note: 'CMatrice<MType> CMatrice<MType>::operator /(MType)'
-c:\users\thiba\desktop\projet\fichiers\cmatrice.h(150): error C2244: 'CMatrice<MType>::operator +' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(149): note: voir la déclaration de 'CMatrice<MType>::operator +'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(150): note: définition
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(150): note: 'CMatrice CMatrice<MType>::operator +(CMatrice<MType>)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(150): note: déclarations existantes
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(150): note: 'CMatrice<MType> CMatrice<MType>::operator +(CMatrice<MType>)'
-c:\users\thiba\desktop\projet\fichiers\cmatrice.h(173): error C2244: 'CMatrice<MType>::operator *' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(172): note: voir la déclaration de 'CMatrice<MType>::operator *'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(173): note: définition
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(173): note: 'CMatrice CMatrice<MType>::operator *(CMatrice<MType>)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(173): note: déclarations existantes
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(173): note: 'CMatrice<MType> CMatrice<MType>::operator *(CMatrice<MType>)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(173): note: 'CMatrice<MType> CMatrice<MType>::operator *(MType)'
-c:\users\thiba\desktop\projet\fichiers\cmatrice.h(199): error C2244: 'CMatrice<MType>::operator -' : impossible de faire correspondre la définition de fonction avec une déclaration existante
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(198): note: voir la déclaration de 'CMatrice<MType>::operator -'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(199): note: définition
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(199): note: 'CMatrice CMatrice<MType>::operator -(CMatrice<MType>)'
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(199): note: déclarations existantes
-  c:\users\thiba\desktop\projet\fichiers\cmatrice.h(199): note: 'CMatrice<MType> CMatrice<MType>::operator -(CMatrice<MType>)'
+﻿  CException.cpp
+  CInteraction.cpp
+  CString.cpp
+  main.cpp
+  Génération de code en cours...
+  ProjetMatrice.vcxproj -> C:\Users\thiba\Desktop\projet\CPP\ProjetMatrices\ProjetMatrice\Debug\ProjetMatrice.exe

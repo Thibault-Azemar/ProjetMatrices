@@ -16,7 +16,7 @@ inline CMatrice<MType>::CMatrice()
   * \param[in] MATarg : la matrice à recopier
   */
 template<class MType>
-inline CMatrice<MType>::CMatrice(CMatrice *MATarg)
+inline CMatrice<MType>::CMatrice(CMatrice &MATarg)
 {
 	uiMATNbLignes = MATarg.uiMATNbLignes;
 	uiMATNbColonnes = MATarg.uiMATNbColonnes;
@@ -29,7 +29,7 @@ inline CMatrice<MType>::CMatrice(CMatrice *MATarg)
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-		for (uiBoucleColonne; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
 			pMATTableau[uiBoucleLigne][uiBoucleColonne] = MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
 		}
@@ -71,16 +71,13 @@ inline CMatrice<MType>::CMatrice(unsigned int uiNbLignes, unsigned int uiNbColon
 template<class MType>
 inline CMatrice<MType>::~CMatrice()
 {
-	if (pMATTableau != nullptr)
-	{
 	unsigned int uiBoucleLigne ;
 
 	for (uiBoucleLigne =0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 	{
-			delete[] pMATTableau[uiBoucleLigne];
+		delete[] pMATTableau[uiBoucleLigne];
 	}
 	delete[] pMATTableau;
-	}
 }
 
 /**
@@ -140,24 +137,24 @@ inline void CMatrice<MType>::MATAfficherMatrice(char *pNomMatrice)
 	cout << " ]\n" << endl;
 }
 
-/**
-  * \fn inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur)
-  * \brief permet de modifier une valeur de la matrice sans passer par le fichier (fonction pour les tests)
-  * \param[in] uiChoixLigne : la ligne de la matrice à modifier
-  * \param[in] uiChoixColonne : la colonne de la matrice à modifier 
-  * \param[in] valeur : la valeur à donner à la ligne et à la colonne spécifiées
-  * \return néant
-  */
 template<class MType>
-inline void CMatrice<MType>::MATModifValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne, MType valeur)
+MType CMatrice<MType>::MATAvoirValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne)
 {
-	if (uiChoixLigne > uiMATNbLignes || uiChoixColonne > uiMATNbColonnes)
-	{
-		char pTexteException[37] = "Choix en dehors de la taille de la matrice\n";
-		throw CException(Mat_Taille_diff, pTexteException);
-	}
-	pMATTableau[uiChoixLigne - 1][uiChoixColonne - 1] = valeur;
+	return pMATTableau[uiChoixLigne][uiChoixColonne];
 }
+
+template<class MType>
+unsigned int CMatrice<MType>::MATGetNbLignes(CMatrice<MType>& MATarg)
+{
+	return MATarg.GetNbLignes;
+}
+
+template<class MType>
+unsigned int CMatrice<MType>::MATGetNbColonnes(CMatrice<MType>& MATarg)
+{
+	return MATarg.GetNbColonnes;
+}
+
 
 /**
   * \fn inline CMatrice<MType> CMatrice<MType>::operator*(MType valeur)
@@ -194,7 +191,7 @@ inline CMatrice<MType> CMatrice<MType>::operator*(const double valeur)
   * \return la multiplication des deux matrices
   */
 template<class MType>
-inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice MATarg)
+inline CMatrice<MType> CMatrice<MType>::operator*(CMatrice &MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbLignes)
 	{
@@ -268,7 +265,7 @@ inline CMatrice<MType> CMatrice<MType>::operator/(const double valeur)
   * \return l'addition des deux matrices
   */
 template<class MType>
-inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice MATarg)
+inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice &MATarg)
 {
 	if (uiMATNbColonnes == MATarg.uiMATNbColonnes && uiMATNbLignes == MATarg.uiMATNbLignes)
 	{
@@ -304,7 +301,7 @@ inline CMatrice<MType> CMatrice<MType>::operator+(CMatrice MATarg)
   * \return la soustraction des deux matrices
   */
 template<class MType>
-inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice MATarg)
+inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice &MATarg)
 {
 	if (uiMATNbColonnes != MATarg.uiMATNbColonnes || uiMATNbLignes != MATarg.uiMATNbLignes)
 	{
@@ -331,6 +328,31 @@ inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice MATarg)
 	return MATsoustraction;
 }
 
+template<class MType>
+inline CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
+{
+	
+	uiMATNbLignes = MATarg.uiMATNbLignes;
+	uiMATNbColonnes = MATarg.uiMATNbColonnes;
+	pMATTableau = new MType*[MATarg.uiMATNbLignes];
+	unsigned int uiBoucleLigne = 0;
+	unsigned int uiBoucleColonne = 0;
+
+	for (uiBoucleLigne; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pMATTableau[uiBoucleLigne] = new MType[uiMATNbColonnes];
+
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	{
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		{
+			pMATTableau[uiBoucleLigne][uiBoucleColonne] = MATarg.pMATTableau[uiBoucleLigne][uiBoucleColonne];
+		}
+	}
+	return *this;
+	
+}
+
+
 /**
   * \fn CMatrice<MType> operator*(const double Valeur, CMatrice<MType> MATarg)
   * \brief commutateur de l'opérateur*
@@ -339,7 +361,28 @@ inline CMatrice<MType> CMatrice<MType>::operator-(CMatrice MATarg)
   * \return inversion des valeurs (commutation)
   */
 template<class MType>
-CMatrice<MType> operator*(const double Valeur, CMatrice<MType> MATarg)
+CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
 {
-	return MATarg * Valeur;
+	/*
+	unsigned int uiMATNbLignes = MATarg.GetNbLignes;
+	unsigned int uiMATNbColonnes = MATarg.GetNbColonnes;
+	unsigned int uiBoucleLigne;
+	unsigned int uiBoucleColonne;
+
+	MType** pTab = new MType*[NbLignes];
+
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
+
+	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
+	{
+		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
+		{
+			pTab[uiBoucleLigne][uiBoucleColonne] = Valeur * pMATTableau[uiBoucleLigne][uiBoucleColonne];
+		}
+	}
+
+	CMatrice<MType> MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
+	*/
+	return MATarg;
 }

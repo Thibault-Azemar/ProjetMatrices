@@ -21,12 +21,17 @@
   <ItemGroup>
     <ClCompile Include="CException.cpp" />
     <ClCompile Include="CInteraction.cpp" />
+    <ClCompile Include="CMatrice.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="CString.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CException.h" />
     <ClInclude Include="CInteraction.h" />
     <ClInclude Include="CMatrice.h" />
+    <ClInclude Include="CString.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

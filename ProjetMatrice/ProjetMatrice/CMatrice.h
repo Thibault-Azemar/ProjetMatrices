@@ -23,8 +23,8 @@ public:
 	CMatrice<MType> MATCalculerTranspose();															//calcule la transposée
 	void MATAfficherMatrice(char *pNomMatrice);													//affichage de la matrice
 	MType MATAvoirValeur(unsigned int uiChoixLigne, unsigned int uiChoixColonne);  //changement d'une valeur
-	unsigned int MATGetNbLignes(CMatrice<MType> &MATarg);
-	unsigned int MATGetNbColonnes(CMatrice<MType> &MATarg);
+	unsigned int MATGetNbLignes();
+	unsigned int MATGetNbColonnes();
 	CMatrice<MType> operator*(const double valeur);															//multiplication par une constante
 	CMatrice<MType> operator*(CMatrice<MType> &MATarg);														//multiplication de deux matrices
 	CMatrice<MType> operator/(const double valeur);															//division par une constante

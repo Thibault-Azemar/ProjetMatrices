@@ -144,15 +144,15 @@ MType CMatrice<MType>::MATAvoirValeur(unsigned int uiChoixLigne, unsigned int ui
 }
 
 template<class MType>
-unsigned int CMatrice<MType>::MATGetNbLignes(CMatrice<MType>& MATarg)
+unsigned int CMatrice<MType>::MATGetNbLignes()
 {
-	return MATarg.GetNbLignes;
+	return uiMATNbLignes;
 }
 
 template<class MType>
-unsigned int CMatrice<MType>::MATGetNbColonnes(CMatrice<MType>& MATarg)
+unsigned int CMatrice<MType>::MATGetNbColonnes()
 {
-	return MATarg.GetNbColonnes;
+	return uiMATNbColonnes;
 }
 
 
@@ -363,13 +363,13 @@ inline CMatrice<MType> CMatrice<MType>::operator=(CMatrice &&MATarg)
 template<class MType>
 CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
 {
-	/*
-	unsigned int uiMATNbLignes = MATarg.GetNbLignes;
-	unsigned int uiMATNbColonnes = MATarg.GetNbColonnes;
+	
+	unsigned int uiMATNbLignes = MATarg.MATGetNbLignes();
+	unsigned int uiMATNbColonnes = MATarg.MATGetNbColonnes();
 	unsigned int uiBoucleLigne;
 	unsigned int uiBoucleColonne;
 
-	MType** pTab = new MType*[NbLignes];
+	MType** pTab = new MType*[uiMATNbLignes];
 
 	for (uiBoucleLigne = 0; uiBoucleLigne < uiMATNbLignes; uiBoucleLigne++)
 		pTab[uiBoucleLigne] = new MType[uiMATNbColonnes];
@@ -378,11 +378,11 @@ CMatrice<MType> operator*(const double Valeur, CMatrice<MType> &MATarg)
 	{
 		for (uiBoucleColonne = 0; uiBoucleColonne < uiMATNbColonnes; uiBoucleColonne++)
 		{
-			pTab[uiBoucleLigne][uiBoucleColonne] = Valeur * pMATTableau[uiBoucleLigne][uiBoucleColonne];
+			pTab[uiBoucleLigne][uiBoucleColonne] = Valeur * MATarg.MATAvoirValeur(uiBoucleLigne, uiBoucleColonne);
 		}
 	}
 
 	CMatrice<MType> MATmultiplication(uiMATNbLignes, uiMATNbColonnes, pTab);
-	*/
-	return MATarg;
+	
+	return MATmultiplication;
 }
